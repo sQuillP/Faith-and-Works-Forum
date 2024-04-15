@@ -1,0 +1,136 @@
+.navbar-container-large {
+    border-bottom: 5px solid #eee;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 0 20px
+}
+.logo {
+    height: 60px;
+    width: 60px;
+    overflow: hidden;
+    object-fit: contain;
+    border-radius: 100%;
+    background: var(--gray);
+}
+
+.nav-title {
+    font-weight: bold;
+    font-size: 25px;
+    color: var(--dark);
+}
+
+
+/* For small screens */
+@media screen and (max-width:975px) {
+    .navbar-container-large {
+        display: none;
+    }
+
+    .navbar-container-small {
+        border-bottom: 5px solid #eee;
+        padding: 0px 20px;
+        min-width: 400px;
+    }
+    .nav-hamburger {
+        width: 24px;
+        border: 1px solid var(--dark);
+        border-radius: 5px;
+        z-index: 30;
+        height: 24px;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .nav-hamburger:after,
+    .nav-hamburger:before,
+    .nav-hamburger div {
+        background: var(--dark);
+        border-radius: 3px;
+        content: "";
+        display: block;
+        height: 2px;
+        margin: 4px 0px;
+        transition: all .2s ease-in-out;
+    }
+
+    .nav-title {
+        font-size: 20px;
+    }
+
+    /* .nav-hamburger:hover:before {
+        transform: translateY(12px) rotate(135deg);
+    }
+
+    .nav-hamburger:hover::after {
+        transform: translateY(-12px) rotate(-135deg);
+    }
+
+    .nav-hamburger:hover div {
+        transform: scale(0);
+    } */
+
+    .nav-menu-slider {
+        position: absolute;
+        top: 65px;
+        left: 0;
+        transform: translateX(-400px);
+        min-width: 400px;
+        width: 400px;
+        transition: transform 300ms ease;
+        padding: 30px;
+        box-sizing: border-box;
+        background: #eee;
+        height: 92vh;
+    }
+
+    .nav-menu-slider.nav-slider-open {
+        transform: translateX(0px)
+    }
+
+    .nav-menu-item {
+        padding: 10px;
+        transition: 100ms linear all;
+    }
+
+    .nav-menu-item:hover {
+        background: lightgray
+    }
+    .nav-menu-item:hover .nav-item-text {
+    }
+
+    .nav-item-text {
+        font-weight: bold;
+        color: var(--dark);
+        padding: 5px 0;
+    }
+}
+
+/* All screens > 976px */
+@media screen and (min-width:976px) {
+    .navbar-container-small {
+        display: none;
+    }
+    .link {
+        padding: 0 10px;
+    }
+    
+    .nav-links {
+        display: flex;
+    }
+    
+    
+    .link-text {
+        text-decoration: none;
+        font-weight: bold;
+        color: var(--dark);
+        padding: 10px;
+        transition: all 300ms linear;
+    }
+    
+    .link-text:hover {
+        color: white;
+        background: var(--dark);
+    }
+}
