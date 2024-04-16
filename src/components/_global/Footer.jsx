@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="footer-container">
             <div className="footer-message-wrapper">
                 <p className="text footer-message">Faith and Works Forum - {new Date().getFullYear()}</p>
-                <p className="text author-small">@sQuillP</p>
+                {/* <p className="text author-small">@sQuillP</p> */}
             </div>
         </div>
     )

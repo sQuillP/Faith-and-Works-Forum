@@ -7,11 +7,21 @@ import {
   RouterProvider
 } from 'react-router-dom';
 import Home from './components/Home/Home';
+import Gathering from './components/Gathering/Gathering';
+import Links from './components/Links/Links';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home/>
+  },
+  {
+    path:'/gathering',
+    element: <Gathering/>
+  }, 
+  {
+    path: '/links',
+    element:<Links/>
   }
 ])
 

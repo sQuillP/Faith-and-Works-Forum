@@ -7,6 +7,6 @@ import "./styles/PageTitle.css"
 export default function PageTitle({title}) {
 
     return (
-        <h1 className="_pagetitle">{title}</h1>
+        <h1 className="text _pagetitle">{title}</h1>
     )
 }
