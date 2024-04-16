@@ -15,31 +15,37 @@ const iconStyle = {
 
 export default function Navbar() {
 
-    const [smallMenuOpen, setSmallMenuOpen] = useState('nav-slider-open');
-    const smallMenuRef = useRef();
+    const [smallMenuOpen, setSmallMenuOpen] = useState('');
+    const [crossBurger, setCrossBurger] = useState("");
+    const smallMenuRef = useRef(null);
+    const xButtonRef = useRef(null);
 
     function handleLogoClick() {
         console.log('firing');
     }
 
     function handleBurgerClick() {
+        console.log('handling burger click');
         if (smallMenuOpen === '') {
-            setSmallMenuOpen('nav-slider-open')
+            setSmallMenuOpen('nav-slider-open');
+            setCrossBurger("active-x");
         } else {
-            setSmallMenuOpen('')
+            setSmallMenuOpen('');
+            setCrossBurger('');
         }
     }
 
+
     //Listen for clicking away from small menu
     function catchMenuClickAway(e) {
-        if( e.target.contains(smallMenuRef.current) === true) {
+        if(xButtonRef.current.contains(e.target) === false && smallMenuRef.current.contains(e.target) === false) {
             setSmallMenuOpen('');
+            setCrossBurger('');
         }
     }
 
     useEffect(()=> {
        document.addEventListener('click',catchMenuClickAway)
-
         return ()=> {
             document.removeEventListener('click', catchMenuClickAway)
         }
@@ -47,7 +53,6 @@ export default function Navbar() {
 
     return (
         <div className="navbar-container">
-
             <div className="navbar-container-large">
                 <div
                     onClick={handleLogoClick}
@@ -59,7 +64,7 @@ export default function Navbar() {
                         
                     >
                         <img src="/FaithAndForumLogo.jpeg" alt="Logo" className="logo" />
-                        <p className="text nav-title">Faith and Forum</p>
+                        <p className="text nav-title">Faith and Works Forum</p>
                     </Stack>
                 </div>
                 <div className="nav-links">
@@ -105,11 +110,11 @@ export default function Navbar() {
                     <Stack 
                         direction={"row"}
                         alignItems={'center'}
-                        
                     >
                         <div 
-                            className="nav-hamburger"
+                            className={`nav-hamburger ${crossBurger}`}
                             onClick={handleBurgerClick}
+                            ref={xButtonRef}
                         >
                             <div></div>
                         </div>
@@ -118,7 +123,7 @@ export default function Navbar() {
                             style={{cursor:'pointer', display:'flex', alignItems:'center'}}
                         >
                             <img src="/FaithAndForumLogo.jpeg" alt="Logo" className="logo" />
-                            <p className="text nav-title">Faith and Forum</p>
+                            <p className="text nav-title">Faith and Work Forum</p>
                         </div>
                     </Stack>
                 <div 
@@ -197,7 +202,6 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
-
         </div>
 
     );
