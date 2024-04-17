@@ -1,3 +1,4 @@
+import "./styles/LinkItem.css";
 import { useNavigate } from "react-router-dom"
 
 
@@ -10,8 +11,8 @@ export default function LinkItem({description, link}) {
 
     return (
         <div onClick={()=> router(link)} className="link-item-container">
-            <i class="fa-solid fa-link"></i>
-            <p className="text link-text">{description}</p>
+            <i className="fa-solid fa-link li-icon"></i>
+            <p className="text link-item-text">{description}</p>
         </div>
     )
 }

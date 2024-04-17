@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 
 
 
-
 export default function Links() {
     const [links, setLinks] = useState([]);
 
@@ -30,6 +29,7 @@ export default function Links() {
             <Navbar/>
             <div className="links-main">
                 <PageTitle title='Helpful Links'/>
+                <hr style={{width:'50vw',margin:'20px auto'}} className="fancy-hr"/>
                 <div className="link-section">
                     {/* Not a linked list...LINKS LIST! */}
                     <ul className="links-list">

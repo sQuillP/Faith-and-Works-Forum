@@ -1,20 +1,33 @@
 .links-main {
-    margin-top: 75px;
-    height: 85vh;
+    margin-top: 10vh;
+    min-height: 80vh;
 }
 
-.links-section {
-    
+
+.lm-header-container {
+    position: relative;
+}
+
+.lm-bottom {
+    width: 25%;
+    margin: 0 auto;
 }
 
 .links-list {
     margin: 0 auto;
+    margin-top: 50px;
     max-width: 500px;
     min-width: 300px;
-    background: green;
-    /* list-style: none; */
+    padding: 0;
 }
+
+.links-list li {
+    margin: 25px 0;
+    text-align: center;
+}
+
 
 .link-item {
     list-style: none;
+    cursor: pointer;
 }

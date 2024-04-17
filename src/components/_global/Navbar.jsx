@@ -63,7 +63,9 @@ export default function Navbar() {
                         alignItems={'center'}
                         
                     >
-                        <img src="/FaithAndForumLogo.jpeg" alt="Logo" className="logo" />
+                        <div className="nav-logo-wrapper">
+                            <img src="/FaithAndForumLogo.jpeg" alt="Logo" className="logo" />
+                        </div>
                         <p className="text nav-title">Faith and Works Forum</p>
                     </Stack>
                 </div>
@@ -110,6 +112,7 @@ export default function Navbar() {
                     <Stack 
                         direction={"row"}
                         alignItems={'center'}
+                        gap={1}
                     >
                         <div 
                             className={`nav-hamburger ${crossBurger}`}
@@ -122,7 +125,9 @@ export default function Navbar() {
                             onClick={handleLogoClick}
                             style={{cursor:'pointer', display:'flex', alignItems:'center'}}
                         >
-                            <img src="/FaithAndForumLogo.jpeg" alt="Logo" className="logo" />
+                            <div className="nav-logo-wrapper">
+                                <img src="/FaithAndForumLogo.jpeg" alt="Logo" className="logo" />
+                            </div>
                             <p className="text nav-title">Faith and Work Forum</p>
                         </div>
                     </Stack>

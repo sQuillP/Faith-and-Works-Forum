@@ -7,7 +7,8 @@ const homeActions = [
     {
         title: "Next Gathering",
         icon: "fa-solid fa-location-dot",
-        description: "Find the time and place for our next meeting"
+        description: "Find the time and place for our next meeting",
+        route:'/'
     },
     {
         title: "Instagram",
@@ -17,15 +18,22 @@ const homeActions = [
     {
         title: "Helpful Links",
         icon: "fa-solid fa-list",
-        description:"Links that could be useful"
+        description:"Links that could be useful",
+        route:'/links'
     },
     {
         title:'Resources',
         icon:"fa-regular fa-address-book",
-        description: "Reach out and get into touch with our hosts"
+        description: "Reach out and get into touch with our hosts",
+        route:'/'
+    },
+    {
+        title: "About",
+        icon: "fa-solid fa-info",
+        description: "Who we are and our mission statement",
+        route:'/about'
     }
 ];
-<i class="fa-regular fa-clock"></i>
 /**
  * @description Home/landing page for FAWF
  */
@@ -61,7 +69,7 @@ export default function Home() {
                                         key={action.title}
                                         title={action.title}
                                         icon={action.icon}
-                                        route="/"
+                                        route={action.route}
                                         description={action.description}
                                     />
                                 )
@@ -69,17 +77,6 @@ export default function Home() {
                         }
                     </div>
                 </div>
-                {/* <div className="home-get-connected-content">
-                    <div className="connected-container">
-                        <p className="text connected-title">
-
-                        </p>
-                        <p className="text connected-message">
-                            Don't miss out, click GET STARTED to keep yourself up to date with everything going on
-                        </p>
-                        <button className="get-connected-btn">Get Started</button>
-                    </div>
-                </div> */}
             </div>
             <Footer/>
         </>
