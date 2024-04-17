@@ -1,0 +1,17 @@
+.gtff-container > * {
+    display: block;
+}
+
+
+.gtff-label {
+    color: #eee;
+    margin: 10px 0;
+}
+
+
+.gtff-input {
+    padding: 7px;
+    outline: none;
+    border: none;
+    background-color: #eee;
+}

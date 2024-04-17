@@ -1,0 +1,42 @@
+
+.gc-main {
+    border-radius: 10px;
+    overflow: hidden;
+    box-sizing: border-box;
+    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;     */
+    width: 350px;
+}
+
+.gc-title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.gc-icon-header i {
+    font-size: 3rem;
+}
+
+.gc-icon-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.gc-title-container {
+    padding: 10px 0;
+}
+
+.gc-main-body {
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.gc-body-item {
+    font-size: 23px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 500;
+    word-wrap: break-word;
+}

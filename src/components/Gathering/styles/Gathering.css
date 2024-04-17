@@ -1,0 +1,40 @@
+.gathering-main {
+    min-height: 90vh;
+    box-sizing: border-box;
+    padding-top: 10vh;
+}
+
+.gathering-header-wrapper {
+    margin-bottom: 5vh;
+}
+
+.gathering-clock-wrapper  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.gathering-content-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gm-countdown-text {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 650px) {
+    .gm-countdown-text {
+        font-size: 1.5rem;
+    }
+}
+
+
+@media screen and (max-width: 420px) {
+    .gathering-clock-wrapper {
+        display: none;
+    }
+}

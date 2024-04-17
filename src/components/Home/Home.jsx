@@ -8,7 +8,7 @@ const homeActions = [
         title: "Next Gathering",
         icon: "fa-solid fa-location-dot",
         description: "Find the time and place for our next meeting",
-        route:'/'
+        route:'/gathering'
     },
     {
         title: "Instagram",

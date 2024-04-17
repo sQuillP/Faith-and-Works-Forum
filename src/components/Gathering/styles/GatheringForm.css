@@ -1,0 +1,54 @@
+
+.gathering-form-container {
+    background: var(--dark);
+    padding: 30px;
+    max-width: 500px;
+    margin: 50px auto 0 auto;
+}
+
+.gt-title-wrapper {
+    margin-bottom: 10px;
+}
+
+.gt-title {
+    font-size: 25px;
+    color: #eee;
+}
+
+.gt-submit-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-gtf {
+    outline: none;
+    border: 2px solid #eee;
+    background: inherit;
+    font-size: 18px;
+    margin-top: 10px;
+    color: #eee;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 200ms linear;
+    ;
+}
+
+.submit-gtf:hover {
+    background: #eee;
+    color: var(--dark);
+}
+
+@media screen and (max-width: 455px) {
+    .gt-title {
+        text-align: center;
+
+    }
+    .gt-submit-wrapper {
+        margin-top: 20px;
+    }
+}
+
