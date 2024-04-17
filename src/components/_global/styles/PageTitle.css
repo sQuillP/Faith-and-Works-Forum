@@ -1,6 +1,7 @@
 
 ._pagetitle {
     text-align: center;
-    font-weight: bold;
-    font-size: large;
+    font-weight: 500;
+    font-size: 3rem;
+    padding-top: 65px;
 }

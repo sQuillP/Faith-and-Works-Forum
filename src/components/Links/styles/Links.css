@@ -1,0 +1,20 @@
+.links-main {
+    margin-top: 75px;
+    height: 85vh;
+}
+
+.links-section {
+    
+}
+
+.links-list {
+    margin: 0 auto;
+    max-width: 500px;
+    min-width: 300px;
+    background: green;
+    /* list-style: none; */
+}
+
+.link-item {
+    list-style: none;
+}

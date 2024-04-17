@@ -17,4 +17,4 @@ admin page
 - about (crud)
 - contacts (crud)
 - gatherings (crud)
-- sending mass emails to subscribers.
+- sending mass emails to subscribers
