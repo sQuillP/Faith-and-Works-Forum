@@ -6,7 +6,7 @@ import "./styles/GatheringFormField.css";
  * @param {*} param0 
  * @returns 
  */
-export default function GatheringFormField({required, label, value, onChange}) {
+export default function GatheringFormField({required,name, label, value, onChange}) {
 
 
     return (
@@ -15,7 +15,7 @@ export default function GatheringFormField({required, label, value, onChange}) {
                 {label} 
                 {required?<span style={{color:'red'}}>*</span>:''}
             </label>
-            <input autoComplete='off' type="text" onChange={onChange} value={value} className="gtff-input"/>
+            <input autoComplete='off' type="text" onChange={(e)=>onChange(name,e.target.value)} value={value} className="gtff-input"/>
         </div>
     )
 }

@@ -20,7 +20,6 @@ export default function Gathering() {
         const hours = Math.floor(totalTime/(1000*60*60))%25
         const minutes = Math.floor(totalTime/(1000*60))%60
         const seconds = Math.floor(totalTime/1000)%60
-        console.log(days, hours, minutes, seconds);
         return {days, hours, minutes, seconds};
     }
 
@@ -30,12 +29,10 @@ export default function Gathering() {
         const interval = setInterval(()=> {
             setDateDiff(DUMMY_DATE - Date.now());
         },1000);
-
         return ()=> clearInterval(interval);
     },[]);
 
 
-    console.log(DUMMY_DATE)
     return (
         <>
             <Navbar/>
