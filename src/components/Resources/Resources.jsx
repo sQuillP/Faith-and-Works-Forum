@@ -3,6 +3,7 @@ import Footer from "../_global/Footer";
 import Navbar from "../_global/Navbar";
 import PageTitle from "../_global/PageTitle";
 import ContactCard from "./ContactCard";
+import ResourceEmailForm from "./ResourceEmailForm";
 
 const DUMMY_CONTACTS = [
     {
@@ -52,9 +53,10 @@ export default function Resources() {
                 <div className="rc-flex-container">
                     <div className="rc-col">
                         {
-                            DUMMY_CONTACTS.map(contact => {
+                            DUMMY_CONTACTS.map((contact, i) => {
                                 return (
                                     <ContactCard
+                                        key={i +" " + contact.image}
                                         {...contact}
                                     />
                                 )
@@ -62,13 +64,11 @@ export default function Resources() {
                         }
                     </div>
                     <div className="rc-col">
-                        <div className="rc-outreach-email">
-                            <p className="outreach-header">Feel Free To Shoot Us an Email!</p>
-                        </div>
+                        <ResourceEmailForm/>
                     </div>
                 </div>
             </div>
             <Footer/>
         </>
-    )
+    );
 }

@@ -1,5 +1,6 @@
+import "./styles/ContactCard.css";
 import { Stack } from "@mui/material"
-
+import { formatPhone } from "../_global/utils";
 
 // https://th.bing.com/th/id/OIP.XSZAFm-5JI7nriDLwZqRQQAAAA?rs=1&pid=ImgDetMain
 
@@ -30,6 +31,7 @@ export default function ContactCard(props) {
 
     // contactDetails = [{type:"phone", value:"6309622100"}]
 
+    console.log(props.contactDetails);
     return (
         <div className="cc-main">
 
@@ -39,25 +41,32 @@ export default function ContactCard(props) {
                         {/* image url for image */}
                         <img src={`${props.image}`} alt="user-image" className="cc-img" />
                     </div>
-                    <div className="cc-lc-bottom">
-                        <p className="text cc-lc-txt">{props.firstName}</p>
-                    </div>
                 </div>
             </div>
             <div className="cc-col">
+                <div className="cc-lc-top">
+                    <p className="text cc-lc-txt">{props.firstName + " " + props.lastName}</p>
+                </div>
                 <div className="cc-rc-wrapper">
                     {
-                        props.contactDetails.map(contactDetail => {
+                        props.contactDetails.map((contactDetail, i) => {
                             return (
                                 <Stack
+                                    key={i}
                                     direction={'row'}
                                     gap={1}
+                                    marginTop={'10px'}
                                 >
                                     <div className="cc-rc-col">
-                                        <i className={getIcon[contactDetail.type]}></i>
+                                        <i className={getIcon[contactDetail.type.toLowerCase()]}></i>
                                     </div>
                                     <div className="cc-rc-col">
-                                        {contactDetail.value}
+                                        <p className="cc-rc-txt text">
+                                            {/* {contactDetail.value} */}
+                                            {
+                                                contactDetail.type.toLowerCase() === 'phone'? formatPhone(contactDetail.value):contactDetail.value
+                                            }
+                                        </p>
                                     </div>
                                 </Stack>
                             )
