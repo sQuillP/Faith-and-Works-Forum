@@ -1,8 +1,15 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 
 .gathering-form-container {
     background: var(--dark);
     padding: 25px;
-    max-width: 500px;
+    max-width: 600px;
     margin: 50px auto 0 auto;
 }
 
@@ -16,9 +23,15 @@
 }
 
 .gt-submit-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .submit-gtf {
@@ -30,9 +43,17 @@
     color: #eee;
     padding: 10px 20px;
     cursor: pointer;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-transition: background 200ms linear;
+    -o-transition: background 200ms linear;
     transition: background 200ms linear;
     ;
 }
@@ -51,4 +72,3 @@
         margin-top: 20px;
     }
 }
-

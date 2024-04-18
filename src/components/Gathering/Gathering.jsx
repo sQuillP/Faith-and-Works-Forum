@@ -6,13 +6,16 @@ import PageTitle from "../_global/PageTitle";
 import { Stack } from "@mui/material";
 import GatheringCard from "./GatheringCard";
 import GatheringForm from "./GatheringForm";
+import { useNavigate } from "react-router-dom";
 
-const DUMMY_DATE = new Date('04/21/2024');
+const DUMMY_DATE = new Date('04/20/2024');
 DUMMY_DATE.setHours(12)
 
 export default function Gathering() {
 
     const [dateDiff, setDateDiff] = useState(DUMMY_DATE - Date.now());
+    const navigate = useNavigate();
+
 
     function getFormattedDate() {
         let totalTime = dateDiff
@@ -26,6 +29,7 @@ export default function Gathering() {
     const dt = getFormattedDate();
 
     useEffect(()=> {
+        window.scrollTo(0,0)
         const interval = setInterval(()=> {
             setDateDiff(DUMMY_DATE - Date.now());
         },1000);
@@ -75,8 +79,8 @@ export default function Gathering() {
                         <div className="gathering-content-bottom">
                             <div className="gathering-content-questions">
                                 <p className="text gcq-header">Got any Questions?</p>
-                                <p className="text gcq-body">Click <b>Get Connected</b> to reach out and find more details about th event</p>
-                                <button className="gc-button">Get Connected</button>
+                                <p className="text gcq-body">Click <b>Get Connected</b> to reach out and find more details about the event</p>
+                                <button onClick={()=>navigate('/resources') } className="gc-button">Get Connected <i class="fa-solid fa-plug gc-plug"></i> </button>
                             </div>
                         </div>
                     </div>

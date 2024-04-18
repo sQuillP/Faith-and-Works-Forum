@@ -18,3 +18,50 @@ admin page
 - contacts (crud)
 - gatherings (crud)
 - sending mass emails to subscribers
+
+
+contacts:
+
+### For Resources Page ###
+contactdetail = {
+    image: string,
+    contactDetails: [
+        {
+            type:"Phone",
+            value:"630-962-2100"
+        },
+        {
+            type:"email",
+            value:"will.m.pattison@gmail.com"
+        }
+    ]
+}
+
+
+
+### For events ###
+Event = {
+    dateStart: Date,
+    when: string,
+    where: string,
+    extraRequests: list? string?
+}
+
+attendees = {
+    eventId: objectid
+    firstName: string,
+    lastName: string
+}
+
+
+### For Links ###
+Link = {
+    title: string,
+    link: string
+}
+
+
+### For About ###
+About = {
+    description: string
+}

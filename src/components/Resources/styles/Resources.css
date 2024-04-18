@@ -1,0 +1,29 @@
+
+
+.resources-container {
+    height: 90vh;
+    box-sizing: border-box;
+    padding-top: 10vh;
+}
+
+.cc-img-container {
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    ;
+}
+
+.cc-img {
+    border: 2px solid #eee;
+}
+
+
+.cc-rc-col {
+    background: #eee;
+}
+
+.rc-flex-container {
+    display: flex;
+    flex-direction: column;
+}

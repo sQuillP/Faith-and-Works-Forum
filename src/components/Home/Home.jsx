@@ -13,7 +13,8 @@ const homeActions = [
     {
         title: "Instagram",
         icon: "fa-brands fa-instagram",
-        description: "See our most recent events and posts"
+        description: "See our most recent events and posts",
+        route:'/'
     },
     {
         title: "Helpful Links",
@@ -25,7 +26,7 @@ const homeActions = [
         title:'Resources',
         icon:"fa-regular fa-address-book",
         description: "Reach out and get into touch with our hosts",
-        route:'/'
+        route:'/resources'
     },
     {
         title: "About",
