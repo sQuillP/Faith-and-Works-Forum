@@ -1,6 +1,14 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 .gathering-main {
     min-height: 90vh;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     padding-top: 10vh;
 }
 
@@ -9,21 +17,65 @@
 }
 
 .gathering-clock-wrapper  {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 
 .gathering-content-cards {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .gm-countdown-text {
     font-size: 3rem;
     font-weight: bold;
+}
+
+
+.gathering-content-questions {
+    max-width: 600px;
+    color: var(--dark);
+    margin: 50px auto;
+    padding: 30px;
+    text-align: center;
+}
+
+.gathering-content-questions > * {
+    margin: 15px 0;
+}
+
+.gcq-header {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.gc-button {
+    padding: 10px 20px;
+    background: var(--dark);
+    color: #eee;
+    font-size: 20px;
+    border: 2px solid var(--dark);
+    cursor: pointer;
+    transition: 200ms linear background;
+}
+
+.gc-button:hover {
+    color: var(--dark);
+    background-color: white;
 }
 
 @media screen and (max-width: 650px) {

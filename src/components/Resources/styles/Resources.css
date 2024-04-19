@@ -1,0 +1,27 @@
+
+
+.resources-container {
+    min-height: 90vh;
+    box-sizing: border-box;
+    padding-top: 10vh;
+}
+
+.rc-flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.rc-flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1000px;
+    flex-wrap: wrap;
+    margin: 50px auto 0 auto;
+}
+
+.rc-col {
+    margin: 20px;
+}
