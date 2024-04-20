@@ -6,11 +6,21 @@ import {
   createBrowserRouter,
   RouterProvider
 } from 'react-router-dom';
+
+// General site components
 import Home from './components/Home/Home';
 import Gathering from './components/Gathering/Gathering';
 import Links from './components/Links/Links';
 import About from './components/about/About';
-import Resources from './components/Resources/Resources';
+import Resources from './components/Resources/Resources'; //ignore import error
+
+// Admin page components
+import Admin from './components/Admin/Admin/Admin';
+import AdminLogin from './components/Admin/Login/AdminLogin';
+import Dashboard from './components/Admin/Dashboard/Dashboard';
+import AuthGuard from './components/Admin/admin_util/AuthGuard';
+// import Instagram from './components/Instagram/Instagram';
+
 
 const router = createBrowserRouter([
   {
@@ -32,6 +42,25 @@ const router = createBrowserRouter([
   {
     path: '/resources',
     element: <Resources/>
+  },
+  //Instagram may or may not be used.
+  // {
+  //   path:'/instagram',
+  //   element:<Instagram/>
+  // }
+  {
+    path:'/admin',
+    element:<Admin/>,
+    children:[
+      {
+        path:'login',
+        element: <AdminLogin/>
+      },
+      {
+        path: 'dashboard',
+        element:<AuthGuard><Dashboard/></AuthGuard>
+      }
+    ]
   }
 ])
 

@@ -51,25 +51,15 @@ export default function ContactCard(props) {
                     {
                         props.contactDetails.map((contactDetail, i) => {
                             return (
-                                <Stack
-                                    key={i}
-                                    direction={'row'}
-                                    gap={1}
-                                    marginTop={'10px'}
-                                >
-                                    <div className="cc-rc-col">
-                                        <i className={getIcon[contactDetail.type.toLowerCase()]}></i>
-                                    </div>
-                                    <div className="cc-rc-col">
+                                    <div key={i} className="cc-rc-col">
                                         <p className="cc-rc-txt text">
-                                            {/* {contactDetail.value} */}
+                                            <i style={{marginRight:'5px'}} className={getIcon[contactDetail.type.toLowerCase()] + ' '+ "cc-rc-icon"}></i>
                                             {
                                                 contactDetail.type.toLowerCase() === 'phone'? formatPhone(contactDetail.value):contactDetail.value
                                             }
                                         </p>
                                     </div>
-                                </Stack>
-                            )
+                            );
                         })
                     }
                 </div>

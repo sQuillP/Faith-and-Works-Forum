@@ -1,4 +1,5 @@
 import "./styles/Home.css";
+import {Stack} from '@mui/material';
 import Navbar from "../_global/Navbar"
 import ActionCard from "./ActionCard";
 import Footer from "../_global/Footer";
@@ -10,12 +11,12 @@ const homeActions = [
         description: "Find the time and place for our next meeting",
         route:'/gathering'
     },
-    {
-        title: "Instagram",
-        icon: "fa-brands fa-instagram",
-        description: "See our most recent events and posts",
-        route:'/'
-    },
+    // {
+    //     title: "Instagram",
+    //     icon: "fa-brands fa-instagram",
+    //     description: "See our most recent events and posts",
+    //     route:'/'
+    // },
     {
         title: "Helpful Links",
         icon: "fa-solid fa-list",
@@ -41,6 +42,11 @@ const homeActions = [
 export default function Home() {
 
 
+    function navigateInstagram() {
+        window.open('https://www.instagram.com/indyfwf/');
+    }
+
+
     return (
         <>
             <Navbar/>
@@ -48,7 +54,7 @@ export default function Home() {
                 <div className="home-hero">
                     <img src="/Indy-Circle.jpg" alt="" className="hero-bg" />
                     <div className="home-call-to-action">
-                        <h1 className="text hero-text hero-header">Faith and Works Forum</h1>
+                        <h1 className="text hero-text hero-header">Faith and Work Forum</h1>
                         <p className="text hero-text home-bible-verse">
                             <i>
                             "And let us consider one another in order to stir up love and good works, not forsaking the assembling of ourselves together, as is the manner of some, but exhorting one another, and so much the more as you see the Day approaching." -
@@ -58,9 +64,27 @@ export default function Home() {
                     </div>
                     <img src="/FaithAndForumLogo.jpeg" alt="FaithAndForum" className="hero-logo" />
                 </div>
+                <div className='home-action-content'>
+                    <Stack
+                        direction='column'
+                        justifyContent='center'
+                        alignItems='center'
+                        gap={2}
+                    >
+                        <h1 className="home-action-title">Follow us on Instagram</h1>
+                        <div className="insta-image-wrapper">
+                            <img src="/Instagram_logo.webp" alt="" className="insta-img" />
+                        </div>
+                        <p className="text insta-link">@indyfwf</p>
+                        <button onClick={navigateInstagram} className="insta-button">
+                            View Instagram
+                            <i className="fa-solid fa-plus"></i>
+                        </button>
+                    </Stack>
+                </div>
                 <div className="home-action-content">
                     <div className="home-action-title-wrapper">
-                        <h1 className="home-action-title">Stay up to Date With Everything We’re Doing</h1>
+                        <h1 className="home-action-title">Stay up to Date With Everything We're Doing</h1>
                     </div>
                     <div className="home-action-container">
                         {

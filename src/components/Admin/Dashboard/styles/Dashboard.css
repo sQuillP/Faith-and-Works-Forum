@@ -1,0 +1,13 @@
+.dashboard-main {
+    min-height: 90vh;
+    box-sizing: border-box;
+    padding-top: 10vh;
+}
+
+
+.dash-page-h2 {
+    font-size: 30px;
+    line-height: 70px;
+    text-align: center;
+    margin-top: 30px;
+}

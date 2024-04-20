@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles/Navbar.css";
 import {Stack} from '@mui/material';
 import { useEffect, useRef, useState } from "react";
@@ -13,16 +13,16 @@ const iconStyle = {
     color:'var(--dark)'
 }
 
+const IG_URL = "https://www.instagram.com/indyfwf/";
+
 export default function Navbar() {
 
     const [smallMenuOpen, setSmallMenuOpen] = useState('');
     const [crossBurger, setCrossBurger] = useState("");
     const smallMenuRef = useRef(null);
     const xButtonRef = useRef(null);
+    const navigation = useNavigate();
 
-    function handleLogoClick() {
-        console.log('firing');
-    }
 
     function handleBurgerClick() {
         console.log('handling burger click');
@@ -55,7 +55,7 @@ export default function Navbar() {
         <div className="navbar-container">
             <div className="navbar-container-large">
                 <div
-                    onClick={handleLogoClick}
+                    onClick={()=> navigation('/')}
                     style={{cursor:'pointer'}}
                 >
                     <Stack 
@@ -66,44 +66,42 @@ export default function Navbar() {
                         <div className="nav-logo-wrapper">
                             <img src="/FaithAndForumLogo.jpeg" alt="Logo" className="logo" />
                         </div>
-                        <p className="text nav-title">Faith and Works Forum</p>
+                        <p className="text nav-title">Faith and Work Forum</p>
                     </Stack>
                 </div>
                 <div className="nav-links">
                     <div className="link">
-                        <Link style={linkStyles} to={'/'}>
+                        <Link style={linkStyles} to={'/gathering'}>
                             <p className="link-text">
                                 Next Gathering
                             </p>
                         </Link>
                     </div>
                     <div className="link">
-                        <Link style={linkStyles} to={'/'}>
+                        <Link style={linkStyles} to={'/about'}>
                             <p className="link-text">
                                 About
                             </p>
                         </Link>
                     </div>
                     <div className="link">
-                        <Link style={linkStyles} to={'/'}>
+                        <Link style={linkStyles} to={'/links'}>
                             <p className="link-text">
                                 Resources
                             </p>
                         </Link>
                     </div>
                     <div className="link">
-                        <Link style={linkStyles} to={'/'}>
+                        <Link style={linkStyles} to={'/resources'}>
                             <p className="link-text">
                                 Get Connected
                             </p>
                         </Link>
                     </div>
-                    <div className="link">
-                        <Link style={linkStyles} to={'/'}>
-                            <p className="link-text">
-                                Insta
-                            </p>
-                        </Link>
+                    <div onClick={()=> window.open(IG_URL)} className="link">
+                        <p className="link-text">
+                            Insta
+                        </p>
                     </div>
                 </div>  
             </div>
@@ -122,7 +120,7 @@ export default function Navbar() {
                             <div></div>
                         </div>
                         <div
-                            onClick={handleLogoClick}
+                            onClick={()=>navigation('/')}
                             style={{cursor:'pointer', display:'flex', alignItems:'center'}}
                         >
                             <div className="nav-logo-wrapper">
@@ -136,74 +134,72 @@ export default function Navbar() {
                     ref={smallMenuRef}
                 >
                     <div className="nav-menu-item">
-                        <Link style={linkStyles} to={'/'}>
+                        <Link style={linkStyles} to={'/gathering'}>
                             <Stack 
                                 direction={'row'} 
                                 alignItems={'center'}
                                 gap={1}
                             >
-                                <i style={iconStyle} className="fa-brands fa-instagram"></i>
+                                <i style={iconStyle} className="fa-solid fa-people-group"></i>
                                 <p className="text nav-item-text">
-                                    Our Insta
+                                    Next Gathering
                                 </p>
                             </Stack>
                         </Link>
                     </div>
                     <div className="nav-menu-item">
-                        <Link style={linkStyles} to={'/'}>
+                        <Link style={linkStyles} to={'/about'}>
                             <Stack 
                                 direction={'row'} 
                                 alignItems={'center'}
                                 gap={1}
                             >
-                                <i style={iconStyle} className="fa-brands fa-instagram"></i>
+                                <i style={iconStyle} className="fa-solid fa-circle-info"></i>
                                 <p className="text nav-item-text">
-                                    Our Insta
+                                    About
                                 </p>
                             </Stack>
                         </Link>
                     </div>
                     <div className="nav-menu-item">
-                        <Link style={linkStyles} to={'/'}>
+                        <Link style={linkStyles} to={'/links'}>
                             <Stack 
                                 direction={'row'} 
                                 alignItems={'center'}
                                 gap={1}
                             >
-                                <i style={iconStyle} className="fa-brands fa-instagram"></i>
+                                <i style={iconStyle} className="fa-solid fa-cookie-bite"></i>
                                 <p className="text nav-item-text">
-                                    Our Insta
+                                   Resources
                                 </p>
                             </Stack>
                         </Link>
                     </div>
                     <div className="nav-menu-item">
-                        <Link style={linkStyles} to={'/'}>
+                        <Link style={linkStyles} to={'/resources'}>
                             <Stack 
                                 direction={'row'} 
                                 alignItems={'center'}
                                 gap={1}
                             >
-                                <i style={iconStyle} className="fa-brands fa-instagram"></i>
+                                <i style={iconStyle} className="fa-solid fa-plug"></i>
                                 <p className="text nav-item-text">
-                                    Get Connected
+                                    Getting Connected
                                 </p>
                             </Stack>
                         </Link>
                     </div>
-                    <div className="nav-menu-item">
-                        <Link style={linkStyles} to={'/'}>
-                            <Stack 
-                                direction={'row'} 
-                                alignItems={'center'}
-                                gap={1}
-                            >
-                                <i style={iconStyle} className="fa-brands fa-instagram"></i>
-                                <p className="text nav-item-text">
-                                    Our Insta
-                                </p>
-                            </Stack>
-                        </Link>
+                    <div onClick={()=> window.open(IG_URL)} className="nav-menu-item">
+                        <Stack 
+                            direction={'row'} 
+                            alignItems={'center'}
+                            gap={1}
+                        >
+                            <i style={iconStyle} className="fa-brands fa-instagram"></i>
+                            <p className="text nav-item-text">
+                                Our Instagram
+                            </p>
+                        </Stack>
                     </div>
                 </div>
             </div>

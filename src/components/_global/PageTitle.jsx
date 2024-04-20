@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
  * @description Component for creating page title for the top of each page.
  * @param {*} param0 
  */
-export default function PageTitle({title}) {
+export default function PageTitle({title, showNavigation=true}) {
 
     const isSmallScreen = useMediaQuery('(max-width: 600px)');
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ export default function PageTitle({title}) {
         >   
             <Box position={'relative'}>
                 {
-                    isSmallScreen===false && (
+                    isSmallScreen===false && showNavigation && (
                         <Box
                             position={'absolute'}
                             left={'-60px'}

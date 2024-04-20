@@ -4,6 +4,8 @@ import Navbar from "../_global/Navbar";
 import PageTitle from "../_global/PageTitle";
 import ContactCard from "./ContactCard";
 import ResourceEmailForm from "./ResourceEmailForm";
+import { Stack } from "@mui/material";
+
 
 const DUMMY_CONTACTS = [
     {
@@ -34,7 +36,8 @@ const DUMMY_CONTACTS = [
                 type:'Email',
                 value:'will.m.pattison@gmail.com'
             }
-        ]
+        ],
+        
     }
 ]
 
@@ -51,7 +54,24 @@ export default function Resources() {
                     <hr className="fancy-hr" style={{width: '50%'}}/>
                 </div>
                 <div className="rc-flex-container">
-                    <div className="rc-col">
+                    <Stack
+                        direction={'column'}
+                        gap={2}
+                        justifyContent={'center'}
+                        alignItems={'center'}
+                        padding={'20px'}
+                        width={'100%'}
+                        sx={{boxSizing:'border-box'}}
+                        
+                    >
+                        <p className="text rc-contact-header">Contact</p>
+                        <p className="text rc-contact-description">
+                            Any immediate announcement and discussion will be held on the GroupMe
+                            mobile app. If you would like stay up to date with the latest 
+                            conversation, either shoot us an email or reach out to any of the contacts
+                            listed to be part of our group chat.
+                        </p>
+
                         {
                             DUMMY_CONTACTS.map((contact, i) => {
                                 return (
@@ -62,7 +82,7 @@ export default function Resources() {
                                 )
                             })
                         }
-                    </div>
+                    </Stack>
                     <div className="rc-col">
                         <ResourceEmailForm/>
                     </div>

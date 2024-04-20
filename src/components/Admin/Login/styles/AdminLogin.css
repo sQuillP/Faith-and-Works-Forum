@@ -1,0 +1,87 @@
+
+.admin-main {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-header {
+    font-size: 35px;
+    margin: 20px 0px;
+}
+
+.login-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.am-login-container {
+    padding: 50px;
+    background: #eee;
+    box-sizing: border-box;
+}
+
+.al-login-field >* {
+    display: block;
+}
+
+.al-login-field {
+    margin: 20px 0;
+}
+
+.am-login-img-wrapper {
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    ;
+}
+
+.login-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.al-login-button {
+    color: white;
+    background: var(--dark);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 20px;
+}
+
+.am-input {
+    padding: 10px;
+    outline: none;
+    border: none;
+    transition: box-shadow 200ms linear;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.al-login-label {
+    margin-bottom: 10px;
+}
+
+.am-input:focus {
+    border-color: rgb(0, 153, 255);
+    box-shadow: 0 0 0 0.2rem rgba(40, 108, 167, 0.25);
+}
+
+@media screen and (max-width: 400px) {
+    .am-login-container {
+        padding: 50px 10px;
+        width: 100%;
+    }
+
+    .am-input {
+        width: 100%;
+    }
+}

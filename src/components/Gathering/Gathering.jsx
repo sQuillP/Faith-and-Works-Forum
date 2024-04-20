@@ -80,7 +80,7 @@ export default function Gathering() {
                             <div className="gathering-content-questions">
                                 <p className="text gcq-header">Got any Questions?</p>
                                 <p className="text gcq-body">Click <b>Get Connected</b> to reach out and find more details about the event</p>
-                                <button onClick={()=>navigate('/resources') } className="gc-button">Get Connected <i class="fa-solid fa-plug gc-plug"></i> </button>
+                                <button onClick={()=>navigate('/resources') } className="gc-button">Get Connected <i className="fa-solid fa-plug gc-plug"></i> </button>
                             </div>
                         </div>
                     </div>

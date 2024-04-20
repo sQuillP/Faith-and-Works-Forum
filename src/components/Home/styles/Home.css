@@ -84,7 +84,8 @@
 
 
 .home-action-title-wrapper {
-    padding: 30px
+    padding: 15px;
+    border-bottom: 1px solid var(--dark);
 }
 
 .home-action-title {
@@ -92,8 +93,46 @@
     text-align: center;
     font-size: 2.5rem;
     font-weight: 400;
-    border-bottom: 1px solid var(--dark);
-    padding-bottom: 15px;
+}
+
+
+.insta-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    ;
+}
+
+
+.insta-button {
+    font-size: 16px;
+    color: white;
+    background: #0095f6;
+    border-radius: 50px;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.insta-button:hover {
+    background: rgb(24, 119, 242);
+}
+
+.insta-button i {
+    margin-left: 5px;
+}
+
+.insta-link {
+    font-size: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+
+.insta-image-wrapper {
+    height: 75px;
+    width: 75px;
+    ;
 }
 
 
