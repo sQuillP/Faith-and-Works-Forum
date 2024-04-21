@@ -10,7 +10,7 @@ const dasboardItems = [
     {
         title:'Update Links',
         icon:'fa-solid fa-link',
-        link:'/'
+        link:'/admin/updatelinks'
     },
     {
         title:'Schedule Gathering',
@@ -20,7 +20,7 @@ const dasboardItems = [
     {
         title:'Update About',
         icon:'fa-solid fa-info',
-        link:'/'
+        link:'/admin/updateabout'
     },
     {
         title:'Email Notification',
@@ -38,8 +38,9 @@ const dasboardItems = [
         link:'',
     },
     {
-        title: 'Home',
-        icon:'fa-solid fa-home'
+        title: 'Home Page',
+        icon:'fa-solid fa-home',
+        link:'/'
     }
 ]
 

@@ -1,0 +1,77 @@
+.u-links-main {
+    min-height: 90vh;
+    box-sizing: border-box;
+    background: var(--dark);
+    padding-top: 100px;
+}
+
+
+.u-links-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #eee;
+    padding: 40px;
+}
+
+.link-header {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+
+.ul-link-input-wrapper {
+    position: relative;
+    margin: 20px 0px;
+    ;
+}
+
+.ul-link-input {
+    padding: 10px 10px;
+    border: none;
+    width: 300px;
+    outline: none;
+    transition: box-shadow 200ms linear;
+}
+
+.ul-link-input-wrapper i {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: gray;
+}
+
+.ul-link-input:focus {
+    border-color: rgb(0, 153, 255);
+    box-shadow: 0 0 0 0.2rem rgba(40, 108, 167, 0.25);
+}
+
+
+.ul-link-body {
+    height: 500px;
+    overflow-y: auto;
+    background-color: white;
+    padding: 20px;
+}
+
+.empty-link-p {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+
+@media screen and (max-width: 400px) {
+    .ul-link-input {
+        width: 200px;
+    }
+    .ul-link-body {
+        padding: 0;
+    }
+    .u-links-container {
+        padding: 0 !important;
+    }
+    .u-links-main {
+        padding: 0;
+        min-height: unset;
+    }
+}

@@ -19,6 +19,8 @@ import Admin from './components/Admin/Admin/Admin';
 import AdminLogin from './components/Admin/Login/AdminLogin';
 import Dashboard from './components/Admin/Dashboard/Dashboard';
 import AuthGuard from './components/Admin/admin_util/AuthGuard';
+import UpdateLinks from './components/Admin/UpdateLinks/UpdateLinks';
+import UpdateAbout from './components/Admin/UpdateAbout/UpdateAbout';
 // import Instagram from './components/Instagram/Instagram';
 
 
@@ -59,6 +61,21 @@ const router = createBrowserRouter([
       {
         path: 'dashboard',
         element:<AuthGuard><Dashboard/></AuthGuard>
+      },
+      {
+        path:'updatelinks',
+        element:( 
+          <AuthGuard>
+            <UpdateLinks/>
+          </AuthGuard>)
+      },
+      {
+        path:'updateabout',
+        element:(
+          <AuthGuard>
+            <UpdateAbout/>
+          </AuthGuard>
+        )
       }
     ]
   }

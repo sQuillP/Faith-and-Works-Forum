@@ -1,0 +1,27 @@
+.ua-main-container  {
+    min-height: 90vh;
+    box-sizing: border-box;
+    padding-top: 10vh;
+    background: var(--dark);
+}
+
+.ua-content-container {
+    padding: 30px 30px 0 30px;
+    background: #eee;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.ua-main-header {
+    font-size: 30px;
+    text-align: center;
+    ;
+}
+
+.ui-main-description {
+    font-size: 16px;
+    text-align: center;
+}
+
+
+
