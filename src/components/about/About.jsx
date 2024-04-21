@@ -24,9 +24,11 @@ export default function About() {
                     </div>
                     <div className="about-section-content">
                         <p className="text about-section-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ipsa accusamus voluptate nemo ea, quis accusantium, beatae odio, corrupti unde explicabo ipsum perferendis ut dolorum deleniti esse eum? Soluta, velit?
-                            Porro dolore in at modi iste distinctio impedit pariatur esse nesciunt facilis dolor nemo omnis veritatis perferendis tempore debitis qui autem, nam expedita? Earum, nihil. Officia praesentium tempore accusamus nulla.
-                            Dolores vitae possimus tempore ad odio asperiores labore quia deserunt, tenetur temporibus sapiente pariatur voluptates eos minus consequuntur, beatae sit molestias aliquam accusamus. Porro, perspiciatis minus deserunt est corrupti numquam!
+                            Welcome to Indianapolis Faith & Work Forum! We host in-person events to allow others
+                            the chance to connect with other like-minded individuals who are passionate about integrating
+                            their faith into the workplace. Whether you're a seasoned professional or just starting your career,
+                            this group is the perfect opportunity to engage in meaningful conversations and build valuable
+                            relationships. Don't miss out on our upcoming events!
                         </p>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ import GatheringCard from "./GatheringCard";
 import GatheringForm from "./GatheringForm";
 import { useNavigate } from "react-router-dom";
 
-const DUMMY_DATE = new Date('04/20/2024');
+const DUMMY_DATE = new Date('Tue May 14 2024 19:00:00 GMT-0400 (Eastern Daylight Time)');
 DUMMY_DATE.setHours(12)
 
 export default function Gathering() {
@@ -70,12 +70,24 @@ export default function Gathering() {
                             flexWrap={'wrap'}
 
                         >
-                            <GatheringCard icon={'fa-regular fa-clock'} title={"When"} description={"On Thursday at 6pm EST"}/>
-                            <GatheringCard icon={'fa-solid fa-map-location'} title={"Where"} description={"At Joshes House located at 3121 Crestwell Drive"}/>
-                            <GatheringCard icon={"fa-solid fa-champagne-glasses"} title={"What to Bring"} description={"This is a very long list of things to bring. Please show up early for this other thing."}/>
+                            <GatheringCard 
+                                icon={'fa-regular fa-clock'} 
+                                title={"When"} 
+                                description={"Tuesday, May 14 from 7 - 9pm EDT"}
+                            />
+                            <GatheringCard 
+                                icon={'fa-solid fa-map-location'} 
+                                title={"Where"} 
+                                description={"200 S Meridian Street Indianapolis, IN 46225"}
+                            />
+                            <GatheringCard 
+                                icon={"fa-solid fa-champagne-glasses"} 
+                                title={"What to Bring"} 
+                                description={"We don't require anything of you for this meeting. It's free!"}
+                            />
                         </Stack>
                         {/* Gathering Form */}
-                        <GatheringForm/>
+                        {/* <GatheringForm/> */}
                         <div className="gathering-content-bottom">
                             <div className="gathering-content-questions">
                                 <p className="text gcq-header">Got any Questions?</p>

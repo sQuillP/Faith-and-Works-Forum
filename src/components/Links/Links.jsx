@@ -11,14 +11,14 @@ export default function Links() {
     const [links, setLinks] = useState([]);
 
     useEffect(()=> {
-        const updatedLinks = []
-        for(let i = 0; i< 10; i++) {
-            updatedLinks.push({
-                description: "How to train your dragon",
-                link: "www.google.com"
-            },)
-        }
-        setLinks(updatedLinks);
+        // const updatedLinks = []
+        // for(let i = 0; i< 10; i++) {
+        //     updatedLinks.push({
+        //         description: "How to train your dragon",
+        //         link: "www.google.com"
+        //     },)
+        // }
+        // setLinks(updatedLinks);
     },[]);
 
     console.log(links);
@@ -32,21 +32,32 @@ export default function Links() {
                 <hr style={{width:'50vw',margin:'20px auto'}} className="fancy-hr"/>
                 <div className="link-section">
                     {/* Not a linked list...LINKS LIST! */}
-                    <ul className="links-list">
-                        {
-                            links.map((link, i)=> {
-                                return (
-                                    <li className="link-item" key={i}>
-                                        <LinkItem
-                                            description={link.description}
-                                            link={link.link}
-                                        />
-                                    </li>
+                    {
+                        links.length > 0 ? (
+                            <ul className="links-list">
+                                {
+                                    links.map((link, i)=> {
+                                        return (
+                                            <li className="link-item" key={i}>
+                                                <LinkItem
+                                                    description={link.description}
+                                                    link={link.link}
+                                                />
+                                            </li>
 
-                                )
-                            })
-                        }
-                    </ul>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        ): (
+                            <div className="empty-links-list">
+                                <p className="text empty-links-header">
+                                    Helpful links will be coming soon! Please be patient.
+                                </p>
+                                <p className="text empty-links-header">404</p>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
             <Footer/>

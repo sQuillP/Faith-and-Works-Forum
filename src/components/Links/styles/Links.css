@@ -38,3 +38,15 @@
     list-style: none;
     cursor: pointer;
 }
+
+
+.empty-links-list {
+    margin-top: 50px;
+}
+
+
+.empty-links-header {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+}

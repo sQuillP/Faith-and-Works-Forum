@@ -9,32 +9,32 @@ import { Stack } from "@mui/material";
 
 const DUMMY_CONTACTS = [
     {
-        image:"https://th.bing.com/th/id/OIP.XSZAFm-5JI7nriDLwZqRQQAAAA?rs=1&pid=ImgDetMain",
-        firstName:'Josh',
-        lastName:'Chudy',
-        contactDetails: [
-            {
-                type:"Phone",
-                value:'6309622100'
-            },
-            {
-                type:'Email',
-                value:'will.m.pattison@gmail.com'
-            }
-        ]
-    },
-    {
-        image:"https://th.bing.com/th/id/OIP.XSZAFm-5JI7nriDLwZqRQQAAAA?rs=1&pid=ImgDetMain",
+        image:"/Michael_Froedge.jpg",
         firstName:'Michael',
         lastName:'Froedge',
         contactDetails: [
             {
                 type:"Phone",
-                value:'6309622100'
+                value:'7655241482'
             },
             {
                 type:'Email',
-                value:'will.m.pattison@gmail.com'
+                value:'michaelfroedge1@gmail.com'
+            }
+        ]
+    },
+    {
+        image:"/Josh_Chudy.png",
+        firstName:'Josh',
+        lastName:'Chudy',
+        contactDetails: [
+            {
+                type:"Phone",
+                value:'8123409928'
+            },
+            {
+                type:'Email',
+                value:'jtchudy@gmail.com'
             }
         ],
         
@@ -66,8 +66,8 @@ export default function Resources() {
                     >
                         <p className="text rc-contact-header">Contact</p>
                         <p className="text rc-contact-description">
-                            Any immediate announcement and discussion will be held on the GroupMe
-                            mobile app. If you would like stay up to date with the latest 
+                            Any immediate announcement and discussion will be held on the <strong>GroupMe </strong>
+                             mobile app. If you would like stay up to date with the latest 
                             conversation, either shoot us an email or reach out to any of the contacts
                             listed to be part of our group chat.
                         </p>
@@ -83,9 +83,9 @@ export default function Resources() {
                             })
                         }
                     </Stack>
-                    <div className="rc-col">
+                    {/* <div className="rc-col">
                         <ResourceEmailForm/>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <Footer/>
