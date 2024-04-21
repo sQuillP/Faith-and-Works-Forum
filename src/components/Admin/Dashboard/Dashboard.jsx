@@ -15,7 +15,7 @@ const dasboardItems = [
     {
         title:'Schedule Gathering',
         icon:'fa-solid fa-calendar-days',
-        link:'/'
+        link:'/admin/schedulegathering'
     },
     {
         title:'Update About',

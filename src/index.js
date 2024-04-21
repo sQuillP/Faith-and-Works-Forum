@@ -21,6 +21,7 @@ import Dashboard from './components/Admin/Dashboard/Dashboard';
 import AuthGuard from './components/Admin/admin_util/AuthGuard';
 import UpdateLinks from './components/Admin/UpdateLinks/UpdateLinks';
 import UpdateAbout from './components/Admin/UpdateAbout/UpdateAbout';
+import ScheduleGathering from './components/Admin/ScheduleGathering/ScheduleGathering';
 // import Instagram from './components/Instagram/Instagram';
 
 
@@ -60,7 +61,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'dashboard',
-        element:<AuthGuard><Dashboard/></AuthGuard>
+        element:(
+          <AuthGuard>
+            <Dashboard/>
+          </AuthGuard>
+        )
       },
       {
         path:'updatelinks',
@@ -74,6 +79,14 @@ const router = createBrowserRouter([
         element:(
           <AuthGuard>
             <UpdateAbout/>
+          </AuthGuard>
+        )
+      },
+      {
+        path:'schedulegathering',
+        element: (
+          <AuthGuard>
+            <ScheduleGathering/>
           </AuthGuard>
         )
       }

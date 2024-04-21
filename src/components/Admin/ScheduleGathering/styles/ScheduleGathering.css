@@ -1,0 +1,30 @@
+.scg-main {
+    min-height: 90vh;
+    padding-top: 10vh;
+    box-sizing: border-box;
+    background: var(--dark);
+}
+
+.scg-header {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.scg-content {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #eee;
+    padding: 30px;
+}
+
+.scg-desc {
+    text-align: center;
+    margin: 50px 0
+}
+
+@media screen and (max-width: 500px) {
+    .scg-main {
+        padding-top: 0;
+    }
+}
