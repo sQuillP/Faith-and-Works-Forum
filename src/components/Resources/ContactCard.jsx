@@ -31,7 +31,6 @@ export default function ContactCard(props) {
 
     // contactDetails = [{type:"phone", value:"6309622100"}]
 
-    console.log(props.contactDetails);
     return (
         <div className="cc-main">
 

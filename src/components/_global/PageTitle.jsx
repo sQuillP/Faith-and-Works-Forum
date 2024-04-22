@@ -11,7 +11,6 @@ export default function PageTitle({title, showNavigation=true}) {
 
     const isSmallScreen = useMediaQuery('(max-width: 600px)');
     const navigate = useNavigate();
-    console.log(isSmallScreen)
 
     return (
         <Stack

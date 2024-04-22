@@ -25,7 +25,6 @@ export default function Navbar() {
 
 
     function handleBurgerClick() {
-        console.log('handling burger click');
         if (smallMenuOpen === '') {
             setSmallMenuOpen('nav-slider-open');
             setCrossBurger("active-x");
@@ -201,6 +200,21 @@ export default function Navbar() {
                             </p>
                         </Stack>
                     </div>
+                    <div className="nav-menu-item">
+                        <Link style={linkStyles} to={'/'}>
+                            <Stack 
+                                direction={'row'} 
+                                alignItems={'center'}
+                                gap={1}
+                            >
+                                <i style={iconStyle} className="fa-solid fa-home"></i>
+                                <p className="text nav-item-text">
+                                    Home
+                                </p>
+                            </Stack>
+                        </Link>
+                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -18,7 +18,6 @@ export default function GatheringForm() {
         setFormData({...formData,[name]:value});
     }
 
-    console.log(formData);
     async function userIsGoingToEvent() {
 
     }

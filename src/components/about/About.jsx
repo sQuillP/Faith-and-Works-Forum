@@ -24,11 +24,9 @@ export default function About() {
                     </div>
                     <div className="about-section-content">
                         <p className="text about-section-text">
-                            Welcome to Indianapolis Faith & Work Forum! We host in-person events to allow others
-                            the chance to connect with other like-minded individuals who are passionate about integrating
-                            their faith into the workplace. Whether you're a seasoned professional or just starting your career,
-                            this group is the perfect opportunity to engage in meaningful conversations and build valuable
-                            relationships. Don't miss out on our upcoming events!
+                            The Indianapolis Faith & Work Forum is a community downtown that aims to 
+                            integrate both faith and work. We also aim to equip leaders to engage the city as 
+                            agents of the redemptive mission.
                         </p>
                     </div>
                 </div>

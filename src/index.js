@@ -4,8 +4,10 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
-  RouterProvider
+  RouterProvider,
+  Navigate
 } from 'react-router-dom';
+
 
 // General site components
 import Home from './components/Home/Home';
@@ -89,8 +91,20 @@ const router = createBrowserRouter([
             <ScheduleGathering/>
           </AuthGuard>
         )
-      }
+      },
+      {
+        path:'*',
+        element: (
+          <Navigate to={'/admin'}/>
+        )
+      },
     ]
+  },
+  {
+    path:'*',
+    element: (
+      <Navigate to={'/'}/>
+    )
   }
 ])
 

@@ -20,8 +20,6 @@ export default function AdminLogin() {
     const [loggingIn, setLoggingIn] = useState(false);
 
     async function login() {
-        console.log('logging in', context)
-
         
         // Run asynchronous code to login
         context.login();

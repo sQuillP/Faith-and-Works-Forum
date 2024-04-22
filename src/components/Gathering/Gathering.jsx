@@ -3,10 +3,11 @@ import { useEffect, useState } from "react"
 import Navbar from "../_global/Navbar";
 import Footer from "../_global/Footer";
 import PageTitle from "../_global/PageTitle";
-import { Stack } from "@mui/material";
+import { Stack, Button } from "@mui/material";
 import GatheringCard from "./GatheringCard";
 import GatheringForm from "./GatheringForm";
 import { useNavigate } from "react-router-dom";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 const DUMMY_DATE = new Date('Tue May 14 2024 19:00:00 GMT-0400 (Eastern Daylight Time)');
 DUMMY_DATE.setHours(12)
@@ -78,16 +79,25 @@ export default function Gathering() {
                             <GatheringCard 
                                 icon={'fa-solid fa-map-location'} 
                                 title={"Where"} 
-                                description={"200 S Meridian Street Indianapolis, IN 46225"}
+                                description={"200 S Meridian Street Indianapolis ste 200, IN 46225"}
                             />
                             <GatheringCard 
                                 icon={"fa-solid fa-champagne-glasses"} 
                                 title={"What to Bring"} 
-                                description={"We don't require anything of you for this meeting. It's free!"}
+                                description={"Food and Drinks will be provided."}
                             />
                         </Stack>
                         {/* Gathering Form */}
                         {/* <GatheringForm/> */}
+                        <Stack direction={'row'} marginTop={'50px'} justifyContent={'center'}>
+                            <button 
+                                className="gc-button" 
+                                onClick={()=> window.open('https://www.eventbrite.com/e/indianapolis-faith-work-forum-launch-party-tickets-883540873537?aff=oddtdtcreator')}
+                                style={{display:'flex', alignItems:'center'}}
+                            >
+                                RSVP <CheckCircleOutlineIcon style={{marginLeft: '10px'}}/>
+                            </button>
+                        </Stack>
                         <div className="gathering-content-bottom">
                             <div className="gathering-content-questions">
                                 <p className="text gcq-header">Got any Questions?</p>

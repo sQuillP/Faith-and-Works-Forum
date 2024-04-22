@@ -29,9 +29,9 @@ export default function CreateAdminLink({open, loading, updateLinks, linkData, u
             // Fetch updated list of links that are saved.
             // call update links
             if(update===true) {
-                console.log('updating link');
+                // console.log('updating link');
             } else {
-                console.log('creating new link');
+                // console.log('creating new link');
             }
             updateLinks(null);
         } catch(error) {

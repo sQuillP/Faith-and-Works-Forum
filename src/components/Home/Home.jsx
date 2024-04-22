@@ -55,12 +55,10 @@ export default function Home() {
                     <img src="/Indy-Circle.jpg" alt="" className="hero-bg" />
                     <div className="home-call-to-action">
                         <h1 className="text hero-text hero-header">Faith and Work Forum</h1>
-                        <p className="text hero-text home-bible-verse">
-                            <i>
-                            "And let us consider one another in order to stir up love and good works, not forsaking the assembling of ourselves together, as is the manner of some, but exhorting one another, and so much the more as you see the Day approaching." -
-                            </i>
-                            &nbsp;  Hebrews 10:25
+                        <p className="text hero-text home-hero-quote">
+                            “Everyone will be forgotten, nothing we do will make any difference, and all good endeavours, even the best, will come to naught. Unless there is God. If the God of the Bible exists, and there is a True Reality beneath and behind this one, and this life is not the only life, then every good endeavour, even the simplest ones, pursued in response to God's calling, can matter forever.”
                         </p>
+                        <p className="home-hero-author">– Tim Keller, Every Good Endeavor: Connecting Your Work to God's Work</p>
                     </div>
                     <img src="/FaithAndForumLogo.jpeg" alt="FaithAndForum" className="hero-logo" />
                 </div>

@@ -36,7 +36,6 @@ export default function ScheduleGathering() {
 
 
     function handleChange(value, name) {
-        console.log(value, name)
         setEventData({...eventData, [name]:value});
     }
 
