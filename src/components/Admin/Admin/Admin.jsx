@@ -7,7 +7,7 @@ export const AuthContext = createContext(null)
 
 export default function Admin() {
 
-    const [token, setToken] = useState("");
+    const [token, setToken] = useState("DUMMY_TOKEN");
 
     async function login() {
         setToken("logged in");

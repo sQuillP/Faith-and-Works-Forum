@@ -23,7 +23,8 @@ import Dashboard from './components/Admin/Dashboard/Dashboard';
 import AuthGuard from './components/Admin/admin_util/AuthGuard';
 import UpdateLinks from './components/Admin/UpdateLinks/UpdateLinks';
 import UpdateAbout from './components/Admin/UpdateAbout/UpdateAbout';
-import ScheduleGathering from './components/Admin/ScheduleGathering/ScheduleGathering';
+import ManageGathering from './components/Admin/ManageGathering/ManageGathering';
+import ManageContacts from './components/Admin/ManageContacts/ManageContacts';
 // import Instagram from './components/Instagram/Instagram';
 
 
@@ -85,10 +86,18 @@ const router = createBrowserRouter([
         )
       },
       {
-        path:'schedulegathering',
+        path:'managegathering',
         element: (
           <AuthGuard>
-            <ScheduleGathering/>
+            <ManageGathering/>
+          </AuthGuard>
+        )
+      },
+      {
+        path:'managecontacts',
+        element: (
+          <AuthGuard>
+            <ManageContacts/>
           </AuthGuard>
         )
       },

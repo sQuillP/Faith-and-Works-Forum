@@ -13,9 +13,9 @@ const dasboardItems = [
         link:'/admin/updatelinks'
     },
     {
-        title:'Schedule Gathering',
-        icon:'fa-solid fa-calendar-days',
-        link:'/admin/schedulegathering'
+        title: "Manage Gathering",
+        icon: 'fa-solid fa-calendar-days',
+        link:'/admin/managegathering'
     },
     {
         title:'Update About',
@@ -23,14 +23,9 @@ const dasboardItems = [
         link:'/admin/updateabout'
     },
     {
-        title:'Email Notification',
-        icon:'fa-regular fa-envelope',
-        link:'/'
-    },
-    {
         title:'Modify Contacts',
         icon:'fa-regular fa-address-book',
-        link:'/'
+        link:'/admin/managecontacts'
     },
     {
         title:'Settings',
@@ -46,10 +41,6 @@ const dasboardItems = [
 
 
 export default function Dashboard() {
-
-
-    const navigate = useNavigate();
-
 
     return (
         <>

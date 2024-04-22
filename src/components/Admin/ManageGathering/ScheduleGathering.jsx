@@ -2,7 +2,7 @@ import "./styles/ScheduleGathering.css";
 
 import Footer from "../../_global/Footer";
 import { DatePicker, LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
-import { Box, FormControlLabel, InputAdornment, Stack, TextField, Checkbox, Button, CircularProgress, Tooltip, IconButton, useMediaQuery, Snackbar, Alert } from "@mui/material";
+import { Box, FormControlLabel, InputAdornment, Stack, TextField, Checkbox, Button, CircularProgress, Tooltip, IconButton, useMediaQuery, Snackbar, Alert, Divider } from "@mui/material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useEffect, useState } from "react";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -11,7 +11,11 @@ import { ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
 
-
+/**
+ * @description fetches the latest event data and will either create a new event or
+ * will update the current event
+ * @returns 
+ */
 export default function ScheduleGathering() {
 
     const [eventData, setEventData] = useState({
@@ -89,25 +93,12 @@ export default function ScheduleGathering() {
                 }
             </Snackbar>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <div className="scg-main">
+                {/* <div className="scg-main"> */}
                     <div className="scg-content">
                         <Box>
-                            <Stack
-                                direction={'row'}
-                                justifyContent={'space-between'}
-                                flexWrap={'wrap'}
-                                gap={3}
-                            >
-                                <Tooltip title="Back to Dasboard">
-                                    <IconButton onClick={()=> navigate('/admin/dashboard')}>
-                                        <ArrowBack/>
-                                    </IconButton>
-                                </Tooltip>
-                                <p className="text scg-header">Schedule Next Meeting</p>
-                                <div></div>
-                            </Stack>
-                            <hr className="fancy-hr" style={{marginBottom:'50px'}} />
-
+                            <p className="text scg-header">Schedule Next Meeting</p>
+                            {/* <hr className="fancy-hr" style={{marginBottom:'50px'}} /> */}
+                            <Divider sx={{mt:2}}/>
                             <p className="text scg-desc">Note that any event updates will reflect in the "Next Gathering" page in client portal.</p>
                         </Box>
                         <Stack
@@ -195,10 +186,8 @@ export default function ScheduleGathering() {
                             </Button>
                         </Stack>
                     </div>
-                </div>
+                {/* </div> */}
             </LocalizationProvider>
-
-            <Footer/>
         </>
     )
 }

@@ -1,4 +1,4 @@
-import { IconButton, Stack, Tooltip } from "@mui/material";
+import { Dialog, IconButton, Snackbar, Stack, Tooltip } from "@mui/material";
 import "./styles/UpdateLinks.css";
 import AddIcon from '@mui/icons-material/Add';
 
@@ -9,6 +9,7 @@ import CreateAdminLink from "./CreateAdminLink";
 import { useState } from "react";
 import { ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import ConfirmDelete from "./ConfirmDelete";
 const DUMMY_LINKS = [
     {
         description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elitculpa facere.',
@@ -43,10 +44,16 @@ export default function UpdateLinks() {
     // For creating a new link.
     const [showLinkPopup, setShowLinkPopup] = useState(false);
 
+    //for deleting a link
+    const [showDeletePopup, setShowDeletePopup] = useState(false);
+
     // For editing a link
     const [showEditLinkPopup, setShowEditLinkPopup] = useState(false);
     // Passed to child popup for editing a link.
     const [updateLinkData, setUpdateLinkData] = useState(null);
+
+    // When user selects an item to delete, this will be updated for hte popup.
+    const [deleteData, setDeleteData] = useState(null);
 
     function onCreateNewLink() {
         setShowLinkPopup(true);
@@ -67,6 +74,20 @@ export default function UpdateLinks() {
     function onOpenUpdatePopup(linkData) {
         setUpdateLinkData(linkData);
         setShowEditLinkPopup(true);
+    }
+
+    function onDeleteLink(linkData) {
+        setShowDeletePopup(true);
+        setDeleteData(linkData);
+        console.log('firing deletelink')
+    }
+
+    async function onConfirmDeleteLink(boolean) {
+        setShowDeletePopup(false);
+        if(boolean === false) {
+            return;
+        }
+        console.log('deleting');
     }
 
 
@@ -104,6 +125,10 @@ export default function UpdateLinks() {
                     />
                 )
             }
+            <ConfirmDelete
+                onDelete={onConfirmDeleteLink}
+                open={showDeletePopup}
+            />
             <div className="u-links-main">
                 <div className="u-links-container">
                     <Stack
@@ -154,6 +179,7 @@ export default function UpdateLinks() {
                                             link={link.link}
                                             linkId={link.linkId}
                                             onUpdate={onOpenUpdatePopup}
+                                            onDelete={onDeleteLink}
                                         />
                                     )
                                 })

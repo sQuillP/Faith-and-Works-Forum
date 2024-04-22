@@ -10,9 +10,9 @@ const buttonSX = {
     textTransform:'unset'
 }
 
-export default function LinkItem({description, link, onUpdate, linkId}) {
+export default function LinkItem({description, link, onUpdate, linkId, onDelete}) {
 
-
+    
 
     return (
         <Accordion
@@ -55,7 +55,7 @@ export default function LinkItem({description, link, onUpdate, linkId}) {
                     </IconButton>
                    </Tooltip>
                     <Tooltip title={"Delete Link"}>
-                        <IconButton>
+                        <IconButton onClick={()=> onDelete({description, link, linkId})}>
                             <DeleteIcon/>
                         </IconButton>
                     </Tooltip>

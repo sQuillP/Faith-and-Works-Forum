@@ -1,0 +1,22 @@
+.mc-main-container {
+    box-sizing: border-box;
+    min-height: 90vh;
+    padding-top: 10vh;
+    background: var(--dark);
+    ;
+}
+
+
+.mc-main-content {
+    max-width: 1000px;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 30px;
+    margin: 0 auto;
+}
+
+
+
+.card-content-box {
+
+}

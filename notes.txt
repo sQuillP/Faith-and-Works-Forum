@@ -23,20 +23,22 @@ admin page
 contacts:
 
 ### For Resources Page ###
-contactdetail = {
-    image: string,
-    contactDetails: [
-        {
-            type:"Phone",
-            value:"630-962-2100"
-        },
-        {
-            type:"email",
-            value:"will.m.pattison@gmail.com"
-        }
-    ]
-}
 
+contactDetail = {
+        image:"/Michael_Froedge.jpg",
+        firstName:'Michael',
+        lastName:'Froedge',
+        contactDetails: [
+            {
+                type:"Phone",
+                value:'7655241482'
+            },
+            {
+                type:'Email',
+                value:'michaelfroedge1@gmail.com'
+            }
+        ]
+    },
 
 
 ### For events ###

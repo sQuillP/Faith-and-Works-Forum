@@ -5,6 +5,7 @@ import ActionCard from "./ActionCard";
 import Footer from "../_global/Footer";
 import { useState } from "react";
 
+
 const homeActions = [
     {
         title: "Next Gathering",
@@ -12,12 +13,6 @@ const homeActions = [
         description: "Find the time and place for our next meeting",
         route:'/gathering'
     },
-    // {
-    //     title: "Instagram",
-    //     icon: "fa-brands fa-instagram",
-    //     description: "See our most recent events and posts",
-    //     route:'/'
-    // },
     {
         title: "Helpful Links",
         icon: "fa-solid fa-list",

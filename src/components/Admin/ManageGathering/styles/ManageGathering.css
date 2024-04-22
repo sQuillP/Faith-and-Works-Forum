@@ -1,0 +1,27 @@
+.mg-main-container {
+    min-height: 90vh;
+    box-sizing: border-box;
+    padding-top: 5vh;
+    background: var(--dark)
+    ;
+}
+
+.mg-main-title {
+    font-size: 30px;;
+    font-weight: 500;
+}
+
+.mg-content-wrapper {
+    background: #eee;
+    max-width: 1600px;
+    padding: 40px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+
+@media screen and (max-width: 800px) {
+    .mg-content-wrapper {
+        padding: 0;
+    }
+}
