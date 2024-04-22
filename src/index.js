@@ -95,7 +95,7 @@ const router = createBrowserRouter([
       {
         path:'*',
         element: (
-          <Navigate to={'/admin'}/>
+          <Navigate to={'/admin/login'}/>
         )
       },
     ]

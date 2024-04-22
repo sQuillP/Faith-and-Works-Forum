@@ -3,6 +3,7 @@ import {Stack} from '@mui/material';
 import Navbar from "../_global/Navbar"
 import ActionCard from "./ActionCard";
 import Footer from "../_global/Footer";
+import { useState } from "react";
 
 const homeActions = [
     {
@@ -41,7 +42,6 @@ const homeActions = [
  */
 export default function Home() {
 
-
     function navigateInstagram() {
         window.open('https://www.instagram.com/indyfwf/');
     }
@@ -52,7 +52,7 @@ export default function Home() {
             <Navbar/>
             <div className="home-container">
                 <div className="home-hero">
-                    <img src="/Indy-Circle.jpg" alt="" className="hero-bg" />
+                    <img src="/Indy-Circle-2.jpg" alt="" className="hero-bg" />
                     <div className="home-call-to-action">
                         <h1 className="text hero-text hero-header">Faith and Work Forum</h1>
                         <p className="text hero-text home-hero-quote">
