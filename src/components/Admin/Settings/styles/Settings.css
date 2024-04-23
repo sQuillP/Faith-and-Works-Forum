@@ -1,0 +1,7 @@
+.admin-settings-container {
+    min-height: 90vh;
+    box-sizing: border-box;
+    padding-top: 10vh;
+    background: var(--dark);
+    ;
+}

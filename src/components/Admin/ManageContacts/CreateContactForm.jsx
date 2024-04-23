@@ -1,6 +1,6 @@
 import { Email, SupervisedUserCircleOutlined } from "@mui/icons-material";
 import "./styles/CreateContactForm.css";
-import { Divider, Typography, Box, Paper, TextField, Stack, InputAdornment, Button, CircularProgress } from "@mui/material";
+import { Divider, Typography, Box, Paper, TextField, Stack, InputAdornment, Button, CircularProgress, useMediaQuery } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 import { useState } from "react";
 import BadgeIcon from '@mui/icons-material/Badge';
@@ -18,6 +18,9 @@ export default function CreateContactForm({onCreateNewContact, creatingContact})
 
     const [formErrors, setFormErrors]= useState({});
 
+    const smallScreen = useMediaQuery('(max-width: 850px)');
+    
+
 
     function handleChange(name, value) {
         setContactForm({...contactForm,[name]:value});
@@ -25,14 +28,13 @@ export default function CreateContactForm({onCreateNewContact, creatingContact})
 
 
 
-    console.log(contactForm);
     function hasErrors() {
         return Object.keys(contactForm)
         .some(key => !!formErrors[key] || contactForm[key].trim() === '')
     }
 
     return (
-        <Paper sx={{p:'20px'}} component={'div'} className="cf-main">
+        <Paper sx={{p:'20px', width: smallScreen === false ? '450px' : '100%'}} component={'div'} elevation={3} className="cf-main">
             <Box>
                 <Typography fontSize={'30px'}>Create New Contact</Typography>
                 <Divider sx={{mt:2, mb: 2}}/>
@@ -67,6 +69,7 @@ export default function CreateContactForm({onCreateNewContact, creatingContact})
                             </InputAdornment>
                         )
                     }}
+                    autoComplete='off'
                     required
                 />  
                 <MuiTelInput
@@ -76,6 +79,8 @@ export default function CreateContactForm({onCreateNewContact, creatingContact})
                     label="Phone"
                     defaultCountry='US'
                     required
+                    autoComplete='off'
+
                 /> 
                 <TextField
                     size="small"
@@ -83,6 +88,7 @@ export default function CreateContactForm({onCreateNewContact, creatingContact})
                     onChange={(e)=> handleChange('email', e.target.value)}
                     label='Email'
                     required
+                    autoComplete='off'
 
                     InputProps={{
                         startAdornment: (
