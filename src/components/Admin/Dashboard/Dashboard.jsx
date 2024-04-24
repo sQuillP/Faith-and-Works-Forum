@@ -1,5 +1,4 @@
 import "./styles/Dashboard.css";
-import { useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
 import DashboardTile from './DashboardTile';
 import PageTitle from "../../_global/PageTitle";
@@ -30,7 +29,7 @@ const dasboardItems = [
     {
         title:'Settings',
         icon:'fa-solid fa-gears',
-        link:'',
+        link:'/admin/settings',
     },
     {
         title: 'Home Page',

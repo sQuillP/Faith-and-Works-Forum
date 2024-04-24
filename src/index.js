@@ -25,6 +25,7 @@ import UpdateLinks from './components/Admin/UpdateLinks/UpdateLinks';
 import UpdateAbout from './components/Admin/UpdateAbout/UpdateAbout';
 import ManageGathering from './components/Admin/ManageGathering/ManageGathering';
 import ManageContacts from './components/Admin/ManageContacts/ManageContacts';
+import Settings from './components/Admin/Settings/Settings';
 // import Instagram from './components/Instagram/Instagram';
 
 
@@ -98,6 +99,14 @@ const router = createBrowserRouter([
         element: (
           <AuthGuard>
             <ManageContacts/>
+          </AuthGuard>
+        )
+      },
+      {
+        path:'settings',
+        element: (
+          <AuthGuard>
+            <Settings/>
           </AuthGuard>
         )
       },
