@@ -1,12 +1,11 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import "./styles/AdminLogin.css";
 import { CircularProgress, Stack, Snackbar, Alert } from "@mui/material";
-import { AuthContext } from "../Admin/Admin";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 export default function AdminLogin() {
 
-    const context = useContext(AuthContext);
+    const context = useOutletContext();
 
 
     const navigate = useNavigate();

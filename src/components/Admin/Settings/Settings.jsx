@@ -17,9 +17,13 @@ import {
     Button,
     Divider,
     InputAdornment,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
 
 } from "@mui/material";
-import { ArrowBack, Check, Close, ExpandMore, Key, Lock, Save } from "@mui/icons-material";
+import { ArrowBack, Check, Close, Badge, ExpandMore, Key, Lock, Logout, Save } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -36,9 +40,17 @@ export default function Settings() {
     const [currentPassword, setCurrentPassword] = useState('');
     const [updatedPassword, setUpdatedPassword] = useState('');
 
+
+    const [logoutDialog, setLogoutDialog] = useState(false);
+
+
     const smallScreen = useMediaQuery('(max-width: 800px)');
 
 
+
+    function onLogout() {
+        //sign out functionality
+    }
 
     async function onSaveUsername() {
         //make async request to change the username.
@@ -47,11 +59,38 @@ export default function Settings() {
     return (
         <>
             <div className="admin-settings-container">
+                <Dialog
+                    open={logoutDialog}
+                    onClose={()=> setLogoutDialog(false)}
+                    fullWidth
+                >
+                    <DialogTitle>Are you sure you want to sign out?</DialogTitle>
+                    <DialogContent>
+                        This will requre you to sign back in.
+                    </DialogContent>
+                    <DialogActions>
+                        <Button
+                            onClick={onLogout}
+                            variant="contained"
+                            color='error'
+                        >
+                            Logout
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color='primary'
+                            onClick={()=> setLogoutDialog(false)}
+
+                        >
+                            Actually, No
+                        </Button>
+                    </DialogActions>
+                </Dialog>
                 <Box
                     component={Paper}
                     sx={{background:'#eee', margin:'0 auto'}}
                     padding={'10px'}
-                    maxWidth={'1500px'}
+                    maxWidth={'1000px'}
                 >
                     <Stack
                         direction={'row'}
@@ -65,7 +104,8 @@ export default function Settings() {
                         </Tooltip>
                         <Typography  fontFamily={'inherit'} fontSize={'35px'} fontWeight={500}>Settings</Typography>
                     </Stack>
-                    <Accordion>
+                    <Typography fontFamily={'inherit'} fontSize={'16px'} marginTop={'10px'} fontWeight={500}>Use this page to manage the root admin account.</Typography>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ExpandMore/>}
                             sx={accordionSX}
@@ -79,7 +119,13 @@ export default function Settings() {
                                 onChange={(e)=> setUpdatedUsername(e.target.value)}
                                 label={"Change Username"}
                                 size="small"
+                                
                                 InputProps={{
+                                    startAdornment:(
+                                        <InputAdornment position="start">
+                                            <Badge/>
+                                        </InputAdornment>
+                                    ),
                                     endAdornment: updatedUsername.trim() !== '' && (
                                         <IconButton size="small" onClick={()=> setUpdatedUsername('')}>
                                             <Close  fontSize={"15px"}/>
@@ -98,7 +144,7 @@ export default function Settings() {
                             </Button>
                         </AccordionActions>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ExpandMore/>}
                             sx={accordionSX}
@@ -139,7 +185,7 @@ export default function Settings() {
                                     onChange={(e)=> setUpdatedPassword(e.target.value)}
                                     size="small"
                                     type="password"
-                                    label="Updated Password"
+                                    label="New Password"
                                     InputProps={{
                                         startAdornment:(
                                             <InputAdornment position="start">
@@ -167,6 +213,20 @@ export default function Settings() {
                             </Button>
                         </AccordionActions>
                     </Accordion>
+                    <Stack
+                        direction={'row'}
+                        alignItems={'center'}
+                        marginTop={'20px'}
+                    >
+                        <Button
+                            endIcon={<Logout/>}
+                            onClick={()=> setLogoutDialog(true)}
+                            variant="contained"
+                            color="error"
+                        >
+                            Sign Out
+                        </Button>
+                    </Stack>
                 </Box>
             </div>
             <Footer/>

@@ -2,11 +2,16 @@ import "./styles/About.css";
 import Footer from "../_global/Footer";
 import Navbar from "../_global/Navbar";
 import PageTitle from "../_global/PageTitle";
-
+import { useEffect, useState } from "react";
+import { ifawfClient } from "../_global/ifawf-api";
+import { useClientData } from "../ClientRoot/ClientRoot";
 
 
 export default function About() {
 
+    const [aboutPageData, setAboutPageData] = useState("");
+    const {about} = useClientData();
+    // const controller = new AbortController();
 
     return (
         <>
@@ -24,9 +29,7 @@ export default function About() {
                     </div>
                     <div className="about-section-content">
                         <p className="text about-section-text">
-                            The Indianapolis Faith & Work Forum is a community downtown that aims to 
-                            integrate both faith and work. We also aim to equip leaders to engage the city as 
-                            agents of the redemptive mission.
+                            {about}
                         </p>
                     </div>
                 </div>

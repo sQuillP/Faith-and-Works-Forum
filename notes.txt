@@ -28,22 +28,15 @@ contactDetail = {
         image:"/Michael_Froedge.jpg",
         firstName:'Michael',
         lastName:'Froedge',
-        contactDetails: [
-            {
-                type:"Phone",
-                value:'7655241482'
-            },
-            {
-                type:'Email',
-                value:'michaelfroedge1@gmail.com'
-            }
-        ]
+        phone: ###-###-####
+        email: michael.froedge@gmail.com
     },
 
 
 ### For events ###
 Event = {
     dateStart: Date,
+    dateEnd:Date
     when: string,
     where: string,
     extraRequests: list? string?

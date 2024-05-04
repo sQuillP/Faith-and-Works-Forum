@@ -1,5 +1,5 @@
 import "./styles/Gathering.css";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useMemo, useState } from "react"
 import Navbar from "../_global/Navbar";
 import Footer from "../_global/Footer";
 import PageTitle from "../_global/PageTitle";
@@ -8,18 +8,57 @@ import GatheringCard from "./GatheringCard";
 import GatheringForm from "./GatheringForm";
 import { useNavigate } from "react-router-dom";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { useClientData } from "../ClientRoot/ClientRoot";
 
-const DUMMY_DATE = new Date('Tue May 14 2024 19:00:00 GMT-0400 (Eastern Daylight Time)');
-DUMMY_DATE.setHours(12)
 
 export default function Gathering() {
 
-    const [dateDiff, setDateDiff] = useState(DUMMY_DATE - Date.now());
+    const {gathering} = useClientData();
+    const gatheringDate = new Date(gathering[0].date);
+    const [dt, setDT] = useState(getFormattedDate());
     const navigate = useNavigate();
 
 
+
+    function _getDateAndTime() {
+        // ex: "Tuesday, May 14 from 7 - 9pm EDT"
+        // A very annoying block of date formatting
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            dayPeriod: 'long'
+        };
+        const [month,  year, day] = gatheringDate.toLocaleString('en-us',options)
+        .replace(',','')
+        .split(' ');
+        const timeStart = formatTime(gatheringDate)
+        let timeEnd = formatTime(new Date(gathering[0].timeEnd));
+        //add pm to the end.
+        if(new Date(gathering[0].timeEnd).getHours() >= 12){
+            timeEnd += ' pm';
+        }
+        return `${month} ${year} on ${day} from ${timeStart} - ${timeEnd}`
+    }
+
+    //format the time hours am/pm
+    function formatTime(time) {
+       if(time.getHours() == 12){
+        return 12
+       }
+        return time.getHours() % 12;
+    }
+    // END block of annoying date formatting.
+
+    //Just cache the date parsing make things go faster.
+    const getDateAndTime = useMemo(()=>_getDateAndTime(),[]);
+
+    /**
+     * @description get the exact days, hours, minutes, and seconds
+     * from the initial gathering date. 
+     */
     function getFormattedDate() {
-        let totalTime = dateDiff
+        let totalTime = new Date(gatheringDate) - Date.now()
         const days = Math.floor(totalTime/(1000*60*60*24));
         const hours = Math.floor(totalTime/(1000*60*60))%25
         const minutes = Math.floor(totalTime/(1000*60))%60
@@ -27,12 +66,10 @@ export default function Gathering() {
         return {days, hours, minutes, seconds};
     }
 
-    const dt = getFormattedDate();
-
     useEffect(()=> {
-        window.scrollTo(0,0)
+        window.scrollTo(0,0);
         const interval = setInterval(()=> {
-            setDateDiff(DUMMY_DATE - Date.now());
+            setDT(getFormattedDate());            
         },1000);
         return ()=> clearInterval(interval);
     },[]);
@@ -74,17 +111,17 @@ export default function Gathering() {
                             <GatheringCard 
                                 icon={'fa-regular fa-clock'} 
                                 title={"When"} 
-                                description={"Tuesday, May 14 from 7 - 9pm EDT"}
+                                description={getDateAndTime}
                             />
                             <GatheringCard 
                                 icon={'fa-solid fa-map-location'} 
                                 title={"Where"} 
-                                description={"200 S Meridian Street Indianapolis ste 200, IN 46225"}
+                                description={gathering[0].location}
                             />
                             <GatheringCard 
                                 icon={"fa-solid fa-champagne-glasses"} 
                                 title={"What to Bring"} 
-                                description={"Food and Drinks will be provided."}
+                                description={gathering[0].extraRequests}
                             />
                         </Stack>
                         {/* Gathering Form */}

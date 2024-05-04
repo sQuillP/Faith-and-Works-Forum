@@ -4,25 +4,15 @@ import Navbar from "../_global/Navbar";
 import LinkItem from "./LinkItem";
 import PageTitle from "../_global/PageTitle";
 import { useEffect, useState } from "react";
+import { useClientData } from "../ClientRoot/ClientRoot";
 
 
 
 export default function Links() {
-    const [links, setLinks] = useState([]);
-
-    useEffect(()=> {
-        // const updatedLinks = []
-        // for(let i = 0; i< 10; i++) {
-        //     updatedLinks.push({
-        //         description: "How to train your dragon",
-        //         link: "www.google.com"
-        //     },)
-        // }
-        // setLinks(updatedLinks);
-    },[]);
+    
+    const {links} = useClientData();
 
     console.log(links);
-
 
     return (
         <>
@@ -40,7 +30,7 @@ export default function Links() {
                                         return (
                                             <li className="link-item" key={i}>
                                                 <LinkItem
-                                                    description={link.description}
+                                                    description={link.title}
                                                     link={link.link}
                                                 />
                                             </li>

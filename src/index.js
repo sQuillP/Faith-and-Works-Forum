@@ -16,6 +16,9 @@ import Links from './components/Links/Links';
 import About from './components/about/About';
 import Resources from './components/Resources/Resources'; //ignore import error
 
+
+
+
 // Admin page components
 import Admin from './components/Admin/Admin/Admin';
 import AdminLogin from './components/Admin/Login/AdminLogin';
@@ -26,29 +29,44 @@ import UpdateAbout from './components/Admin/UpdateAbout/UpdateAbout';
 import ManageGathering from './components/Admin/ManageGathering/ManageGathering';
 import ManageContacts from './components/Admin/ManageContacts/ManageContacts';
 import Settings from './components/Admin/Settings/Settings';
+import ClientRoot from './components/ClientRoot/ClientRoot';
+import rootLoader from './components/_global/loaders/rootLoader';
 // import Instagram from './components/Instagram/Instagram';
 
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home/>
-  },
-  {
-    path:'/gathering',
-    element: <Gathering/>
-  }, 
-  {
-    path: '/links',
-    element:<Links/>
-  },
-  {
-    path:"/about",
-    element:<About/>
-  },
-  {
-    path: '/resources',
-    element: <Resources/>
+    path: '/',
+    element: <ClientRoot/>,
+    loader: rootLoader,
+    children: [
+      {
+        path: "/home",
+        element: <Home/>
+      },
+      {
+        path:'/gathering',
+        element: <Gathering/>
+      }, 
+      {
+        path: '/links',
+        element:<Links/>
+      },
+      {
+        path:"/about",
+        element:<About/>
+      },
+      {
+        path: '/resources',
+        element: <Resources/>
+      },
+      {
+        path:"*",
+        element: (
+          <Navigate to={'/home'} replace/>
+        )
+      }
+    ]
   },
   //Instagram may or may not be used.
   // {
@@ -118,12 +136,6 @@ const router = createBrowserRouter([
       },
     ]
   },
-  {
-    path:'*',
-    element: (
-      <Navigate to={'/'}/>
-    )
-  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,7 +1,6 @@
-import { useContext } from "react"
-import { AuthContext } from "../Admin/Admin"
+import {useEffect } from "react"
 import { Navigate } from "react-router-dom";
-
+import { useOutletContext } from "react-router-dom";
 
 /**
  * @description Ensure that users accessing children props have proper authentication
@@ -9,7 +8,13 @@ import { Navigate } from "react-router-dom";
  * @returns 
  */
 export default function AuthGuard({children}) {
-    const context = useContext(AuthContext);
+    const context = useOutletContext();
+    console.log('outlet context', context);
+
+    useEffect(()=> {
+        console.log('context token is ', context.token);
+    },[context.token]);
+
     if(!context.token) {
         return <Navigate to={'/admin/login'}/>
     }

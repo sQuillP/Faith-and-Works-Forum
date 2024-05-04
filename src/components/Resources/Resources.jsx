@@ -5,6 +5,7 @@ import PageTitle from "../_global/PageTitle";
 import ContactCard from "./ContactCard";
 import ResourceEmailForm from "./ResourceEmailForm";
 import { Stack } from "@mui/material";
+import { useClientData } from "../ClientRoot/ClientRoot";
 
 
 const DUMMY_CONTACTS = [
@@ -15,7 +16,7 @@ const DUMMY_CONTACTS = [
         contactDetails: [
             {
                 type:"Phone",
-                value:'7655241482'
+                value:'(765)-524-1482'
             },
             {
                 type:'Email',
@@ -30,7 +31,7 @@ const DUMMY_CONTACTS = [
         contactDetails: [
             {
                 type:"Phone",
-                value:'8123409928'
+                value:'(812)-340-9928'
             },
             {
                 type:'Email',
@@ -43,7 +44,8 @@ const DUMMY_CONTACTS = [
 
 export default function Resources() {
 
-
+    const {contacts} = useClientData();
+    console.log('contacts', contacts)
 
     return (
         <>
@@ -73,7 +75,7 @@ export default function Resources() {
                         </p>
 
                         {
-                            DUMMY_CONTACTS.map((contact, i) => {
+                            contacts.map((contact, i) => {
                                 return (
                                     <ContactCard
                                         key={i +" " + contact.image}
