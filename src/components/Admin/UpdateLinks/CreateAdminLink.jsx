@@ -16,10 +16,11 @@ import { useState } from "react";
 import TitleIcon from '@mui/icons-material/Title';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import CloseIcon from '@mui/icons-material/Close';
+import { ifawfAdmin } from "../../_global/ifawf-api";
 
 export default function CreateAdminLink({open, loading, updateLinks, linkData, update=false}) {
 
-    const [linkTitle, setLinkTitle] = useState(update === true?linkData.description:'');
+    const [linkTitle, setLinkTitle] = useState(update === true?linkData.title:'');
     const [link, setLink] = useState(update === true?linkData.link:"");
     const [showError, setShowError] = useState(false);
 
@@ -28,13 +29,23 @@ export default function CreateAdminLink({open, loading, updateLinks, linkData, u
             // Make post request to aws
             // Fetch updated list of links that are saved.
             // call update links
+            let linkResponse = null;
             if(update===true) {
                 // console.log('updating link');
+                linkResponse = await ifawfAdmin.put('/links',{title: linkTitle, link});
             } else {
-                // console.log('creating new link');
+                linkResponse = await ifawfAdmin.post('/links', {title: linkTitle, link});
             }
-            updateLinks(null);
+            console.log(linkResponse);
+            if(linkResponse.data.status >= 400) {
+                setShowError(true);
+            } else {
+                console.log(linkResponse.data.data);
+                updateLinks(linkResponse.data.data)
+            }
+
         } catch(error) {
+            console.log('in error catch',error.message);
             setShowError(true);
             // 
         }

@@ -6,38 +6,20 @@ import AdminLinkItem from './AdminLinkItem';
 import Footer from "../../_global/Footer";
 import CreateAdminLink from "./CreateAdminLink";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import ConfirmDelete from "./ConfirmDelete";
-const DUMMY_LINKS = [
-    {
-        description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elitculpa facere.',
-        link:'www.google.com',
-        linkId:1
-    },
-    {
-        description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit.  accusantium culpa facere.',
-        link:'www.google.com',
-        linkId:2
-    },
-    {
-        description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.re.',
-        link:'www.google.com',
-        linkId:3
-    },
-    {
-        description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. .',
-        link:'www.google.com',
-        linkId:4
-    }
-]
+
+import { ifawfAdmin } from "../../_global/ifawf-api";
+
+
 
 export default function UpdateLinks() {
     
     const navigate = useNavigate();
 
-    const [fetchedLinks, setFetchedLinks]= useState(DUMMY_LINKS);
+    const [fetchedLinks, setFetchedLinks]= useState([]);
     const [searchedLinks, setSearchedLinks] = useState(fetchedLinks);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -55,6 +37,18 @@ export default function UpdateLinks() {
     // When user selects an item to delete, this will be updated for hte popup.
     const [deleteData, setDeleteData] = useState(null);
 
+    console.log('fetched links', fetchedLinks);
+    useEffect(()=> {
+        (async ()=>{
+            const linkResponse = await ifawfAdmin.get('/links');
+            const links = linkResponse.data.data;
+            setFetchedLinks(links);
+            setSearchedLinks(links);
+            console.log('links!', links);
+        })()
+    },[]);
+
+
     function onCreateNewLink() {
         setShowLinkPopup(true);
     }
@@ -65,7 +59,7 @@ export default function UpdateLinks() {
         if(term.trim() === '') {
             setSearchedLinks(fetchedLinks);
         } else {
-            const filteredTitles = fetchedLinks.filter(link=> link.description.toLowerCase().includes(term) || link.link.toLowerCase().includes(term));
+            const filteredTitles = fetchedLinks.filter(link=> link.title.toLowerCase().includes(term) || link.link.toLowerCase().includes(term));
             setSearchedLinks(filteredTitles);
         }
     }
@@ -82,12 +76,28 @@ export default function UpdateLinks() {
         console.log('firing deletelink')
     }
 
+
+    // TODO: Work on this part a bit more. Handle better error handling.
     async function onConfirmDeleteLink(boolean) {
-        setShowDeletePopup(false);
         if(boolean === false) {
+            setShowDeletePopup(false);
             return;
         }
-        console.log('deleting');
+        try {
+            console.log('actual delete data', deleteData);
+            console.log({title:deleteData.title})
+            const deleteResponse = await ifawfAdmin.delete('/links',{data:{title:deleteData.title}});
+            if(deleteResponse.data.status >= 400) {
+                console.log('unable to delete link');
+            } else {
+                setSearchedLinks(deleteResponse.data.data);
+                setFetchedLinks(deleteResponse.data.data);
+            }
+        } catch(error) {
+            console.log('deleting');
+        } finally {
+            setShowDeletePopup(false);
+        }
     }
 
 
@@ -100,6 +110,7 @@ export default function UpdateLinks() {
         if(updatedLinks != null){
             // add updated links to state
             setFetchedLinks(updatedLinks);
+            setSearchedLinks(updatedLinks)
         }
         setShowLinkPopup(false);
         setShowEditLinkPopup(false);
@@ -175,9 +186,8 @@ export default function UpdateLinks() {
                                     return (
                                         <AdminLinkItem
                                             key={i}
-                                            description={link.description}
+                                            title={link.title}
                                             link={link.link}
-                                            linkId={link.linkId}
                                             onUpdate={onOpenUpdatePopup}
                                             onDelete={onDeleteLink}
                                         />

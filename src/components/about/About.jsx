@@ -2,16 +2,12 @@ import "./styles/About.css";
 import Footer from "../_global/Footer";
 import Navbar from "../_global/Navbar";
 import PageTitle from "../_global/PageTitle";
-import { useEffect, useState } from "react";
-import { ifawfClient } from "../_global/ifawf-api";
 import { useClientData } from "../ClientRoot/ClientRoot";
 
 
 export default function About() {
 
-    const [aboutPageData, setAboutPageData] = useState("");
     const {about} = useClientData();
-    // const controller = new AbortController();
 
     return (
         <>

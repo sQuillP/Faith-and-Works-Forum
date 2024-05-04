@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./styles/AdminLogin.css";
 import { CircularProgress, Stack, Snackbar, Alert } from "@mui/material";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { ifawfClient } from "../../_global/ifawf-api";
+import axios from "axios";
 
 export default function AdminLogin() {
 
@@ -10,6 +12,7 @@ export default function AdminLogin() {
 
     const navigate = useNavigate();
     const [showLoginError, setShowLoginError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const [loginData, setLoginData] = useState({
         username:'',
@@ -19,9 +22,25 @@ export default function AdminLogin() {
     const [loggingIn, setLoggingIn] = useState(false);
 
     async function login() {
-        
+        setLoggingIn(true);
+        try {
+            const loginResponse = await axios.post('https://h5zwtcapne.execute-api.us-east-2.amazonaws.com/PROD/login',loginData)
+            console.log(loginResponse)
+            setLoggingIn(false);
+            if(loginResponse.data.status >=400) {
+                throw new Error("Invalid username or password");
+            }
+            context.login(loginResponse.data.data);
+            // Handle case for true error 500
+        } catch(error) {
+            setErrorMessage(error.message);
+            setShowLoginError(true);
+            setLoggingIn(false);
+        }
+
+        // console.log9('token', token);
+        // context.login(token);
         // Run asynchronous code to login
-        context.login();
     }
 
 
@@ -39,7 +58,7 @@ export default function AdminLogin() {
                     variant="filled"
                     sx={{ width: '100%' }}
                 >
-                    Unable to login. Please check your internet or contact IT.
+                   {errorMessage}
                 </Alert>
             </Snackbar>
                 <p className="text login-header">Admin Portal</p>

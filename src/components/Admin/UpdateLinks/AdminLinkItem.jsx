@@ -10,7 +10,7 @@ const buttonSX = {
     textTransform:'unset'
 }
 
-export default function LinkItem({description, link, onUpdate, linkId, onDelete}) {
+export default function LinkItem({title, link, onUpdate, onDelete}) {
 
     
 
@@ -24,7 +24,7 @@ export default function LinkItem({description, link, onUpdate, linkId, onDelete}
                 expandIcon={<ExpandMore sx={{fontSize:'30px'}} />}
 
             >
-                <p className="text li-summary">{description}</p>
+                <p className="text li-summary">{title}</p>
             </AccordionSummary>
             <AccordionDetails>
                 <Stack
@@ -50,12 +50,12 @@ export default function LinkItem({description, link, onUpdate, linkId, onDelete}
                     flexWrap={'wrap'}
                 >
                    <Tooltip title={"Edit Link"}>
-                    <IconButton onClick={()=> onUpdate({description, link, linkId})}>
+                    <IconButton onClick={()=> onUpdate({title, link})}>
                         <Edit/>
                     </IconButton>
                    </Tooltip>
                     <Tooltip title={"Delete Link"}>
-                        <IconButton onClick={()=> onDelete({description, link, linkId})}>
+                        <IconButton onClick={()=> onDelete({title})}>
                             <DeleteIcon/>
                         </IconButton>
                     </Tooltip>
