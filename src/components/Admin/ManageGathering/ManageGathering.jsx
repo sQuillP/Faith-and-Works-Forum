@@ -9,6 +9,8 @@ import { Box, Card, CardContent, IconButton, Stack, Tooltip, Typography, useMedi
 import Footer from "../../_global/Footer";
 import { ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { ifawfAdmin } from "../../_global/ifawf-api";
 
 
 
@@ -16,8 +18,9 @@ import { useNavigate } from "react-router-dom";
 export default function ManageGathering() {
 
     const smallScreen = useMediaQuery('(max-width: 800px)');
-
     const navigate = useNavigate();
+
+
 
     const cardSX =  {
         maxWidth: smallScreen?'100%':'300px',
@@ -63,6 +66,11 @@ export default function ManageGathering() {
                             </CardContent>
                         </Card>
                     </Stack>
+                    {/* <Card sx={{padding:'10px', mb:2}}>
+                        <CardContent>
+                            <Typography variant="h5">Current Event Details</Typography>
+                        </CardContent>
+                    </Card> */}
                     <Stack
                         direction={'row'}
                         gap={2}

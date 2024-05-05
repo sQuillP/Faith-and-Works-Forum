@@ -5,92 +5,151 @@ import Footer from "../../_global/Footer";
 import ManageContactCard from "./ManageContactCard";
 import CreateContactForm from "./CreateContactForm";
 
-import { Box, Paper, Typography, Stack, useMediaQuery, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Tooltip, IconButton, Snackbar, Alert } from "@mui/material";
+import { 
+    Box, 
+    Paper, 
+    Typography, 
+    Stack, 
+    useMediaQuery, 
+    Dialog, 
+    DialogTitle, 
+    DialogContent, 
+    DialogContentText, 
+    DialogActions, 
+    Button, 
+    Tooltip, 
+    IconButton, 
+    Snackbar, 
+    Alert, 
+    CircularProgress 
+} from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { ifawfAdmin, ifawfClient } from "../../_global/ifawf-api";
 
-
-
-const DUMMY_CONTACTS = [
-    {
-        image:"/Michael_Froedge.jpg",
-        firstName:'Michael',
-        lastName:'Froedge',
-        phone:'7655241482',
-        email:'michaelfroedge1@gmail.com'
-    },
-    {
-        image:"/Josh_Chudy.png",
-        firstName:'Josh',
-        lastName:'Chudy',
-        phone:'8123409928',
-        email:'jtchudy@gmail.com'
-    }
-]
 
 export default function ManageContacts() {
 
 
-    const [contactList, setContactList] = useState(DUMMY_CONTACTS);
+    const [contactList, setContactList] = useState([]);
     const navigate = useNavigate();
 
     //Contact is being created
     const [creatingContact, setCreatingContact] = useState(false);
 
+    //Deleting a contact.
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
     const [deleteContact, setDeleteContact] = useState({});
 
+    //Updating contact
     const [updateContact, setUpdateContact] = useState(null);
     const [updatingContact, setUpdatingContact] = useState(false);
 
     //for snackbar functionality
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
-
     //For when any CRUD update fails
     const [contactDBError, setContactDBError] = useState(false);
-
+    const [loadingContacts, setLoadingContacts] = useState(false);
     const smallScreen = useMediaQuery('(max-width:800px)');
 
 
     useEffect(()=> {
+        ( async ()=> {
+            try {
+                setLoadingContacts(true);
+                const contactsResponse = await ifawfAdmin.get('/contacts')
+                if(contactsResponse.data.status >= 400) {
+                    throw new Error(contactsResponse.data.data);
+                }
+                setContactList(contactsResponse.data.data)
+            } catch(error) {
+                setContactDBError(true);
+                setOpenSnackbar(true);
+            } finally {
+                setLoadingContacts(false);
+            }
+        })();
         
     },[]);
 
 
-    function onUpdateContact(newContactDetails) {
+    async function onUpdateContact(newContactDetails) {
         //Make async request to update the new contact details.
+        console.log('updating contact with new contact details', newContactDetails);
     }
     
 
-
+    // Use this function to show the popup window.
     function onRemoveContact(removeContactDetails) {
-        //make async request to remove contact details
         console.log('removing contact');
         setOpenDeleteDialog(true);
         setDeleteContact(removeContactDetails);
     }
 
-    async function _removeContact() {
+    //Make Delete request and change UI accordingly for deleting contact.
+    async function _removeContact(contact) {
         //remove the contact
-        console.log('removing', deleteContact)
+        try{
+            setUpdatingContact(true);
+            setUpdateContact(contact)
+            const contactDeleteResponse = await ifawfAdmin.delete('/contacts',{data:{email:contact.email}});
+            if(contactDeleteResponse.data.status >=400) {
+                throw new Error("invalid request");
+            }
+            setContactList(contactDeleteResponse.data.data);
+            setContactDBError(false);//clear error
+            setUpdatingContact(false);//clear loading animation
+            setOpenSnackbar(true);//show success message
+            setOpenDeleteDialog(false);//close the delete dialog
+        } catch(error) {
+            setContactDBError(true);//show error in update
+            setOpenSnackbar(true);//Make sure that snackbar is open for error message
+            setUpdatingContact(false);//remove update animation
+        }
     }
 
     async function _createNewContact(newContact) {
-        console.log('creating new contact');
         setCreatingContact(true);
+        console.log(newContact);
         setTimeout(()=> setCreatingContact(false), 2000);
+        try {
+            // code
+            const newContactResponse = await ifawfAdmin.post('/contacts',newContact);
+            if(newContactResponse.data.status >= 400) {
+                throw new Error("invalid request");
+            }
+            setContactList(newContactResponse.data.data);
+            setContactDBError(false);
+            setCreatingContact(false);
+            setOpenSnackbar(true);
+        } catch(error) {
+            setContactDBError(true);
+            setOpenSnackbar(true);
+            setCreatingContact(false);
+        }
     }
 
 
-
+    // Make API request for updating contact.
     async function _updateContact(contact) {
-        setUpdatingContact(true);
-        setUpdateContact(contact);
-        setOpenSnackbar(true);
-        setTimeout(()=> {
+        try {
+            console.log('updating contact');
+            setUpdatingContact(true);
+            setUpdateContact(contact);
+            const contactResponse = await ifawfAdmin.put('/contacts',contact);
+            if(contactResponse.data.status >=400) {
+                throw new Error("invalid request");
+            }
+            setContactList(contactResponse.data.data);
+            setContactDBError(false);
             setUpdatingContact(false);
-        },2000);
+            setOpenSnackbar(true);
+        } catch(error) {
+            setContactDBError(true);
+            setOpenSnackbar(true);
+            setUpdateContact(false);
+        }
     }
 
 
@@ -112,7 +171,7 @@ export default function ManageContacts() {
                     </DialogContent>
                     <DialogActions>
                         <Button
-                            onClick={_removeContact}
+                            onClick={()=> _removeContact(deleteContact)}
                             color="error"
                         >
                             Delete
@@ -126,7 +185,7 @@ export default function ManageContacts() {
                 <Snackbar
                     open={openSnackbar}
                     autoHideDuration={4000}
-                    onClose={()=> setOpenSnackbar(false)}
+                    onClose={()=>{ setOpenSnackbar(false)}}
                     anchorOrigin={{horizontal:'center', vertical:'bottom'}}
                 >
                     {
@@ -170,21 +229,31 @@ export default function ManageContacts() {
                             creatingContact={creatingContact}
 
                         />
-                        <Box width={'100%'}>
-                            {
-                                contactList.map(contact=> {
-                                    return (
-                                        <ManageContactCard 
-                                            updatingContact={updateContact?.email === contact.email && updatingContact=== true}
-                                            key={contact.email}
-                                            onUpdateContact={_updateContact} 
-                                            contact={contact}
-                                            onRemoveContact={onRemoveContact}
-                                        />
-                                    )
-                                })
-                            }
-                        </Box>
+                        {
+                            loadingContacts === true ? (
+                                <Box width={'100%'} height={'100%'}>
+                                    <Stack width={'100%'} height={'100%'} alignItems={'center'} justifyContent={'center'}>
+                                        <CircularProgress sx={{color:'var(--dark)'}} size={80}/>
+                                    </Stack>
+                                </Box>
+                            ):(
+                                <Box width={'100%'}>
+                                    {
+                                        contactList.map(contact=> {
+                                            return (
+                                                <ManageContactCard 
+                                                    updatingContact={updateContact?.email === contact.email && updatingContact=== true}
+                                                    key={contact.email}
+                                                    onUpdateContact={_updateContact} 
+                                                    contact={contact}
+                                                    onRemoveContact={onRemoveContact}
+                                                />
+                                            )
+                                        })
+                                    }
+                                </Box>
+                            )
+                        }
                     </Stack>
                 </div>
             </div>

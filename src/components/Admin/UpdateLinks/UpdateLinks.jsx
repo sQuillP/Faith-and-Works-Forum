@@ -1,4 +1,14 @@
-import { Dialog, IconButton, Snackbar, Stack, Tooltip } from "@mui/material";
+import { 
+    Dialog,
+     IconButton, 
+     Snackbar, 
+     Stack, 
+     Tooltip,
+     CircularProgress,
+     Box,
+     Typography,
+    
+    } from "@mui/material";
 import "./styles/UpdateLinks.css";
 import AddIcon from '@mui/icons-material/Add';
 
@@ -21,7 +31,6 @@ export default function UpdateLinks() {
 
     const [fetchedLinks, setFetchedLinks]= useState([]);
     const [searchedLinks, setSearchedLinks] = useState(fetchedLinks);
-    const [searchTerm, setSearchTerm] = useState('');
 
     // For creating a new link.
     const [showLinkPopup, setShowLinkPopup] = useState(false);
@@ -37,14 +46,26 @@ export default function UpdateLinks() {
     // When user selects an item to delete, this will be updated for hte popup.
     const [deleteData, setDeleteData] = useState(null);
 
+    const [loadingLinks, setLoadingLinks] = useState(false);
+
+    const [errorPage, setErrorPage] = useState(false);
+
     console.log('fetched links', fetchedLinks);
     useEffect(()=> {
         (async ()=>{
-            const linkResponse = await ifawfAdmin.get('/links');
-            const links = linkResponse.data.data;
-            setFetchedLinks(links);
-            setSearchedLinks(links);
-            console.log('links!', links);
+            setLoadingLinks(true);
+            try {
+                const linkResponse = await ifawfAdmin.get('/links');
+                const links = linkResponse.data.data;
+                setFetchedLinks(links);
+                setSearchedLinks(links);
+                setLoadingLinks(false);
+            } catch(error) {
+                setErrorPage(true);
+                setLoadingLinks(false);
+            }
+
+            
         })()
     },[]);
 
@@ -73,7 +94,6 @@ export default function UpdateLinks() {
     function onDeleteLink(linkData) {
         setShowDeletePopup(true);
         setDeleteData(linkData);
-        console.log('firing deletelink')
     }
 
 
@@ -176,24 +196,36 @@ export default function UpdateLinks() {
                     </Stack>
                     <div className="ul-link-body">
                         {
-                            searchedLinks.length === 0 ? (
-                                <>
-                                    <p className="empty-link-p">404</p>
-                                    <p className="link-header">No links found.</p>
-                                </>
-                            ): (
-                                searchedLinks.map((link, i) => {
+                            (()=> {
+                                if(loadingLinks === true) {
                                     return (
-                                        <AdminLinkItem
-                                            key={i}
-                                            title={link.title}
-                                            link={link.link}
-                                            onUpdate={onOpenUpdatePopup}
-                                            onDelete={onDeleteLink}
-                                        />
+                                        <Box height={'100%'} width={'100%'}>
+                                            <Stack height={'100%'} width={'100%'} justifyContent={'center'} alignItems={'center'}>
+                                                <CircularProgress size={80} sx={{color:'var(--dark)', marginBottom: 10}}/>
+                                            </Stack>
+                                        </Box>
                                     )
-                                })
-                            )
+                                } else if(searchedLinks.length === 0) {
+                                    return (
+                                        <>
+                                            <p className="empty-link-p">404</p>
+                                            <p className="link-header">No links found.</p>
+                                        </>
+                                    )
+                                } else {
+                                    return searchedLinks.map((link,i)=>{
+                                        return (
+                                            <AdminLinkItem
+                                                key={i}
+                                                title={link.title}
+                                                link={link.link}
+                                                onUpdate={onOpenUpdatePopup}
+                                                onDelete={onDeleteLink}
+                                            />
+                                        )
+                                    })
+                                }
+                            })()
                         }
                     </div>
                 </div>

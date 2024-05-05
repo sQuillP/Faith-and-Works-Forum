@@ -5,16 +5,17 @@ import { MuiTelInput } from "mui-tel-input";
 import { useState } from "react";
 import BadgeIcon from '@mui/icons-material/Badge';
 
-
+const INITIAL_CONTACT_FORM = {
+    firstName:'',
+    lastName:'',
+    phone:'',
+    email:'',
+    image:''
+}
 
 export default function CreateContactForm({onCreateNewContact, creatingContact}) {
 
-    const [contactForm, setContactForm] = useState({
-        firstName:'',
-        lastName:'',
-        phone:'',
-        email:''
-    });
+    const [contactForm, setContactForm] = useState(INITIAL_CONTACT_FORM);
 
     const [formErrors, setFormErrors]= useState({});
 
@@ -30,7 +31,13 @@ export default function CreateContactForm({onCreateNewContact, creatingContact})
 
     function hasErrors() {
         return Object.keys(contactForm)
-        .some(key => !!formErrors[key] || contactForm[key].trim() === '')
+        .some(key => (!!formErrors[key] || contactForm[key].trim() === '' )&& key !== 'image')
+    }
+
+
+    function handleCreateContact() {
+        onCreateNewContact(contactForm);
+        setContactForm(INITIAL_CONTACT_FORM);
     }
 
     return (
@@ -101,7 +108,7 @@ export default function CreateContactForm({onCreateNewContact, creatingContact})
                 />
                 <Button
                     fullWidth
-                    onClick={onCreateNewContact}
+                    onClick={handleCreateContact}
                     variant='contained'
                     size="small"
                     disabled={creatingContact || hasErrors()}

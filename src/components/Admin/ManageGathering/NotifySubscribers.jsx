@@ -2,9 +2,10 @@
 import "./styles/NotifySubscribers.css";
 import { useState } from "react"
 import Footer from "../../_global/Footer"
-import { TextField, Stack,Button, RadioGroup, Radio, FormControlLabel, Tooltip, IconButton, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Snackbar, Alert, Divider } from "@mui/material";
+import { TextField, Stack,Button, RadioGroup, Radio, FormControlLabel, Tooltip, IconButton, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Snackbar, Alert, Divider, CircularProgress } from "@mui/material";
 import { ArrowBack, Check, Email } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { ifawfAdmin } from "../../_global/ifawf-api";
 
 
 
@@ -13,13 +14,13 @@ export default function EmailSubscribers() {
     const [emailContent, setEmailContent] = useState('');
 
     //current_event | all_subscribers
-    const [audience, setAudience] = useState('current_event');
-    const [emailSubject, setEmailSubject] = useState('');
+    const [audience, setAudience] = useState('event');
+    // const [emailSubject, setEmailSubject] = useState('');
 
     const navigate = useNavigate();
 
     const [openProceedDialog, setOpenProceedDialog] = useState(false);
-    const [openSnackbar, setOpenSnackbar] = useState(true);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
 
     const [sendingEmails, setSendingEmails] = useState(false);
     const [emailError, setEmailError] = useState(false);
@@ -30,11 +31,27 @@ export default function EmailSubscribers() {
      */
     async function handleSubmit() {
         console.log('submitting email');
-        setOpenProceedDialog(false);
-        setOpenSnackbar(true);
+        try {
+            setOpenProceedDialog(false);
+            setSendingEmails(true);
+            const emailSubmitResponse = await ifawfAdmin.post('/notify-subscribers', {
+                message:emailContent
+            }, {
+                params:{
+                    type:audience
+                }
+            });
+            setEmailError(false);
+            setEmailContent('');
+            // setEmailSubject('');
+        } catch(error) {
+            console.log("ERROR",error);
+            setEmailError(true);
+        } finally{
+            setOpenSnackbar(true);
+            setSendingEmails(false);
+        }
     }
-
-
 
     return (
         <>
@@ -98,7 +115,8 @@ export default function EmailSubscribers() {
                             <Divider sx={{mt:2}}/>
                         </div>
                         <div className="es-mail-body">
-                            <TextField
+                        {/* Subject is not used since predefined template already uses this information. */}
+                            {/* <TextField
                                 onChange={(e)=> setEmailSubject(e.target.value)}
                                 fullWidth
                                 placeholder="ex: Update in the gathering time & place"
@@ -107,9 +125,10 @@ export default function EmailSubscribers() {
                                 size="small"
                                 sx={{mb: 2}}
                                 required
-                            />
+                            /> */}
                             <TextField 
                                 multiline 
+                                disabled={sendingEmails}
                                 onChange={(e)=> setEmailContent(e.target.value)}
                                 value={emailContent}
                                 placeholder="Email Content goes here. This can be announcements, changes in dates, etc."
@@ -123,16 +142,19 @@ export default function EmailSubscribers() {
                         <RadioGroup
                             aria-labelledby="demo-radio-buttons-group-label"
                             name="radio-buttons-group"
-                            onChange={e=> console.log(e.target.value)}
+                            onChange={e=> setAudience(e.target.value)}
+                            value={audience}
                         >
                             <FormControlLabel 
-                                value="current_event" 
+                                value="event"
+                                // onChange={()=> setAudience('event')} 
                                 control={<Radio />} 
                                 label="Subscribers for current event" 
                             />
                             <FormControlLabel 
-                                value="all_subscribers" 
-                                control={<Radio />} 
+                                value="all" 
+                                control={<Radio />}
+                                // onChange={()=> setAudience('all')} 
                                 label="All subscribers" 
                             />
                         </RadioGroup>
@@ -143,8 +165,8 @@ export default function EmailSubscribers() {
                             marginTop={'20px'}
                         >
                             <Button
-                                endIcon={<Email/>}
-                                disabled={emailContent.trim() === ''}
+                                endIcon={sendingEmails === false ? <Email/> : <CircularProgress sx={{color:'var(--dark)'}} size={15}/>}
+                                disabled={emailContent.trim() === '' || sendingEmails}
                                 onClick={()=> setOpenProceedDialog(true)}
                             >
                                 Notify

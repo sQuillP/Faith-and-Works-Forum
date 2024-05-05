@@ -111,7 +111,7 @@ export default function Gathering() {
                             <GatheringCard 
                                 icon={'fa-regular fa-clock'} 
                                 title={"When"} 
-                                description={getDateAndTime}
+                                description={getDateAndTime + " (EST)"}
                             />
                             <GatheringCard 
                                 icon={'fa-solid fa-map-location'} 

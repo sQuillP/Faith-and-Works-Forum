@@ -3,25 +3,53 @@ import "./styles/UpdateAbout.css";
 import Footer from "../../_global/Footer";
 import { ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-
-const DUMMY_ABOUT_DATA = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis accusamus porro enim beatae rerum dolore voluptates aut quas voluptate iusto harum excepturi expedita, magni quae ut corporis iste soluta molestias."
+import { useEffect, useState } from "react";
+import { ifawfAdmin } from "../../_global/ifawf-api";
 
 
 export default function UpdateAbout() {
 
+
+
     const navigate = useNavigate();
-    const [aboutDescription, setAboutDescription] = useState(DUMMY_ABOUT_DATA);
+    const [aboutDescription, setAboutDescription] = useState('');
     const [showNotification, setShowNotification] = useState(false);    
     const [showError, setShowError] = useState(false);
-    const [updatingData, setUpdatingdata] = useState(true);
+    const [updatingData, setUpdatingdata] = useState(false);
 
+
+    // Remember to use abortcontroller?
+    useEffect(()=> {
+        (async ()=> {
+            try {
+                const aboutResponse = await ifawfAdmin.get('/about');
+                if(aboutResponse.data.status >= 400) {
+                    throw new Error("Invalid api call");
+                }
+                setAboutDescription(aboutResponse.data.data);
+            } catch(error) {
+                console.log(error.message);
+                setShowError(true);
+                setShowNotification(true);
+            }
+        })();
+    },[]);
 
     /**
      * @description make async request to API and update the about page.
      */
     async function onSaveAboutChanges() {
-        setShowNotification(true);
+        try {
+            setUpdatingdata(true);
+            const updateAboutResponse = await ifawfAdmin.put('/about',{about:aboutDescription});
+            setAboutDescription(updateAboutResponse.data.data);
+            setShowNotification(true);
+        } catch(error) {
+            setShowNotification(true);
+            setShowError(true);
+        } finally {
+            setUpdatingdata(false);
+        }
     }
 
     return (
