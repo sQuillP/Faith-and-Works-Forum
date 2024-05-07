@@ -1,4 +1,5 @@
-import { Table, 
+import { 
+    Table, 
     TableCell, 
     TableContainer, 
     TableHead,
@@ -7,7 +8,6 @@ import { Table,
     Box,
     Typography,
     TableBody,
-    TableFooter,
     TablePagination,
     Skeleton,
     Stack,
@@ -20,9 +20,10 @@ import { Table,
 
 } from "@mui/material";
 import {styled} from '@mui/material/styles'
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { UnfoldLess, UnfoldMore } from "@mui/icons-material";
+import { ifawfAdmin } from "../../_global/ifawf-api";
 
 
 
@@ -44,31 +45,94 @@ const TABLE_HEADER_CELLS = [
     "Date Joined"
 ];
 
+const TABLE_BODY_CELLS= [
+    'email',
+    'firstName',
+    'lastName',
+    'dateJoined'
+]
+
+
+const LIMIT = 5;
+
 
 
 export default function ManageUserTable() {
 
     const [tableRows, setTableRows] = useState([]);
+
     const [currentTablePage, setCurrentTablePage] = useState(0);
 
-    const [loadingRows, setLoadingRows] = useState(true);
+    // Used for paginating the next request
+    const [ExclusiveStartKey, setExclusiveStartKey] = useState(['']);
 
+
+    const [loadingRows, setLoadingRows] = useState(true);
     const smallScreen = useMediaQuery('(max-width: 800px');
 
 
     //event_goers | all_subscribers
-    const [subscriptionFilter, setSubscriptionFilter] = useState('event_goers');
+    const [subscriptionFilter, setSubscriptionFilter] = useState('event');
     const [collapse, setCollapse] = useState(false);
 
+    const [rowCount, setRowCount] = useState(0);
 
-    
-    function handlePageChange(e, newPage) {
+
+    // Update the subscribers when page is changed.
+    async function handlePageChange(e, newPage) {
         setCurrentTablePage(newPage);
+        await fetchSusbcribers();
     }
 
-    useEffect(()=> {
-        //Make api call for getting users attending
-        generateDummyData();
+
+    /**
+     * @description Get the event id for the current event. This is used in the aprams for fetching all users
+     * subscribed to this event.
+     */
+    const populateEventId = useCallback( async ()=> {
+        try {
+            const gatheringResponse = await ifawfAdmin.get('/gathering');
+            const gathering = gatheringResponse.data.data[0];
+            return gathering.created;
+        } catch(error) {
+            return '0';
+        }
+    },[]);
+
+
+    const fetchSusbcribers = useCallback( async ()=> {
+        try {
+            setLoadingRows(true);
+            const query =  {
+                type: subscriptionFilter,
+                limit: LIMIT.toString(),
+                ExclusiveStartKey:ExclusiveStartKey[currentTablePage]
+            };
+            if(subscriptionFilter === 'event') {
+                const eventid = await populateEventId();
+                query['eventid'] = eventid;
+            }
+            console.log('sent query', query);
+            const subscribersResponse = await ifawfAdmin.get('/subscribers',{params:query});
+            const body = subscribersResponse.data;
+
+            // Add pagination to the current request
+            if(typeof(body.ExclusiveStartKey) === 'string' && body.ExclusiveStartKey.length != 0) {
+                setExclusiveStartKey([...ExclusiveStartKey, body.ExclusiveStartKey])
+            } else if(typeof(body.ExclusiveStartKey) === 'object') {
+                setExclusiveStartKey([...ExclusiveStartKey, body.ExclusiveStartKey.email +" "+body.ExclusiveStartKey.eventid]);
+            }
+
+            //update the ui now
+            setTableRows(body.data);
+            setRowCount(body.count);
+
+            console.log('subscribers response', subscribersResponse.data);
+        } catch(error) {
+            console.log(error);
+        } finally {
+            setLoadingRows(false);
+        }
     },[]);
 
 
@@ -77,46 +141,28 @@ export default function ManageUserTable() {
      * @description handle any filter changes that occur
      */
     useEffect(()=> {
-
-        /**
-         * @description - Get a list of all subscribers that are subscribed to the website.
-         */
-        async function fetchAllSubscribers() {
-            console.log('fetching all subscribers')
-        }
+        fetchSusbcribers();
+    },[subscriptionFilter,fetchSusbcribers]);
 
 
-        /**
-         * @description - get a list of all users who are currently going to the scheduled event.
-         */
-        async function fetchEventGoers() {
-            console.log('fetching all event goers');
-        }
+    /**
+     * @description Make sure that current page is 0, set exclusivestartkey to first paginated key,
+     * and that subscription filter is set to what the new filter value is.
+     */
+    function handleFilterChange(e) {
+        setCurrentTablePage(0);
+        setExclusiveStartKey(['']);
+        setSubscriptionFilter(e.target.value);
+    }
 
 
-        if(subscriptionFilter === 'event_goers') {
-            fetchEventGoers();
+    function transformCellData(key, cellData) {
+        if(key === 'dateJoined') {
+            const date = new Date(Number(cellData));
+            return `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`
         } else {
-            fetchAllSubscribers();
+            return cellData;
         }
-    },[subscriptionFilter]);
-
-
-
-    function generateDummyData() {
-        const updatedRows = [];
-        for(let i = 0; i< 5; i++) {
-            updatedRows.push({
-                email:'will.m.pattison-'+(i+1)+'@gmail.com',
-                firstName:`William-${i+1}`,
-                lastName:`Pattison-${i+1}`,
-                dateJoined: new Date().toLocaleDateString()
-            });
-        }
-        setTableRows(updatedRows);
-        setTimeout(()=> {
-            setLoadingRows(false);
-        },2000);
     }
 
     return (
@@ -159,10 +205,10 @@ export default function ManageUserTable() {
                                 <Select
                                     size="small"
                                     value={subscriptionFilter}
-                                    onChange={(e)=> setSubscriptionFilter(e.target.value)}
+                                    onChange={handleFilterChange}
                                 >
-                                    <MenuItem value={'all_subscribers'}>All Subscribers</MenuItem>
-                                    <MenuItem value={'event_goers'}>Event Goers</MenuItem>
+                                    <MenuItem value={'all'}>All Subscribers</MenuItem>
+                                    <MenuItem value={'event'}>Event Goers</MenuItem>
                                 </Select>
                             }
 
@@ -212,10 +258,10 @@ export default function ManageUserTable() {
                                         return (
                                             <StyledTableRow key={row.email}>
                                                 {
-                                                    Object.keys(row).map(key => {
+                                                    TABLE_BODY_CELLS.map(key => {
                                                         return (
                                                             <TableCell key={row.email+row[key]+i}>
-                                                                {row[key]}
+                                                                {transformCellData(key, row[key])}
                                                             </TableCell>
                                                         );
                                                     })
@@ -230,7 +276,7 @@ export default function ManageUserTable() {
                 </TableContainer>
                 <TablePagination
                     component={'div'}
-                    count={tableRows.length}
+                    count={rowCount}
                     page={currentTablePage}
                     rowsPerPageOptions={[5]}
                     rowsPerPage={5}

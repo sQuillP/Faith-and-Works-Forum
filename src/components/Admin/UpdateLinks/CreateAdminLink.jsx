@@ -10,7 +10,8 @@ import {
     DialogActions,
     Snackbar,
     Alert,
-    Tooltip
+    Tooltip,
+    CircularProgress
     } from "@mui/material";
 import { useState } from "react";
 import TitleIcon from '@mui/icons-material/Title';
@@ -22,10 +23,15 @@ export default function CreateAdminLink({open, loading, updateLinks, linkData, u
 
     const [linkTitle, setLinkTitle] = useState(update === true?linkData.title:'');
     const [link, setLink] = useState(update === true?linkData.link:"");
+
+    const [showSnackbar, setShowSnackbar] = useState(false);
     const [showError, setShowError] = useState(false);
+
+    const [updatingLink, setUpdatingLink] = useState(false);
 
     async function addLink() {
         try {
+            setUpdatingLink(true);
             // Make post request to aws
             // Fetch updated list of links that are saved.
             // call update links
@@ -41,13 +47,17 @@ export default function CreateAdminLink({open, loading, updateLinks, linkData, u
                 setShowError(true);
             } else {
                 console.log(linkResponse.data.data);
-                updateLinks(linkResponse.data.data)
+                updateLinks(linkResponse.data.data);
+                setShowError(false);
             }
-
         } catch(error) {
             console.log('in error catch',error.message);
             setShowError(true);
             // 
+        } finally {
+            console.log("showing snackbar");
+            setShowSnackbar(true);
+            setUpdatingLink(false);
         }
     }
 
@@ -79,16 +89,27 @@ export default function CreateAdminLink({open, loading, updateLinks, linkData, u
             fullWidth
         >
             <Snackbar
-                open={showError}
+                open={showSnackbar}
                 autoHideDuration={4000}
-                onClose={()=> setShowError(false)}
+                onClose={()=> setShowSnackbar(false)}
                 anchorOrigin={{horizontal:'center', vertical:'bottom'}}
             >
-                <Alert
-                    severity='error'
-                >
-                    Unable to Create Link. Check your connection or contact IT.
-                </Alert>
+            {
+                showError === true ? (
+                    <Alert
+                        severity='error'
+                    >
+                        Unable to perform action. Check your connection or contact IT.
+                    </Alert>
+                ): (
+                    <Alert
+                        severity="success"
+                    >
+                        Successfully updated links! Changes have been reflected.
+                    </Alert>
+                )
+            }
+
             </Snackbar>
             <DialogTitle>{update?"Edit Link":"Create new Link"}</DialogTitle>
             <DialogContent dividers sx={{padding: '30px 20px 40px 20px'}}>
@@ -148,14 +169,17 @@ export default function CreateAdminLink({open, loading, updateLinks, linkData, u
             <DialogActions>
                     <Button
                         // variant="filled"
+                        disabled={updatingLink}
                         onClick={addLink}
                         variant='outlined'
                         color="primary"
+                        endIcon={updatingLink && <CircularProgress sx={{color:'var(--dark)'}} size={20}/>}
                         sx={{textTransform:'unset'}}
                     >
                         {update?"Update Link":"Add Link"}
                     </Button>
                     <Button
+                        disabled={updatingLink}
                         variant="outlined"
                         color="error"
                         sx={{textTransform:'unset'}}

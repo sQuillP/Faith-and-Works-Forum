@@ -27,36 +27,20 @@ const DEFAULT_FORM_BODY = {
 export default function ScheduleGathering() {
 
     const [eventData, setEventData] = useState(DEFAULT_FORM_BODY);
-
-
     const [notifySubscribers, setNotifySubscribers] = useState(false);
-
-
-
     // For Creating an event
     const [creatingEvent, setCreatingEvent] = useState(false);
-
     const [eventError, setEventError] = useState(false);
     const [openSnackbar, setOpenSnackbar] = useState(false);
-
-
     // For Updating an event
     const [updatingEvent, setUpdatingEvent] = useState(false);
-
-
     //for deleting an event
     const [deletingEvent, setDeletingEvent]= useState(false);
-
-
-
     //If there is already an event, this flag determines if we will 
     //create a new event or update the current one.
     const [isUpdateMode, setIsUpdateMode] = useState(false);
-
     const navigate = useNavigate();
     const isSmallScreen = useMediaQuery('(max-width:650px)');
-
-        
     const [loadingCurrentEvent, setLoadingCurrentEvent] = useState(false);
     const [currentEvent, setCurrentEvent] = useState(null);
     const [eventLoadError, setEventLoadError] = useState(false);
@@ -84,6 +68,7 @@ export default function ScheduleGathering() {
                 setEventLoadError(true);
             } finally {
                 setLoadingCurrentEvent(false);
+                console.log('done loading');
             }
         })();
     },[]);
@@ -175,6 +160,9 @@ export default function ScheduleGathering() {
             setUpdatingEvent(false);
         }
     }
+
+
+    
 
 
     async function onDeleteEvent() {
@@ -332,7 +320,7 @@ export default function ScheduleGathering() {
                                         </Button>
                                         <Button
                                             onClick={onDeleteEvent}
-                                            disabled={deletingEvent || loadingCurrentEvent}
+                                            disabled={deletingEvent || loadingCurrentEvent || updatingEvent}
                                             color='error'
                                             variant='contained'
                                             sx={{textTransform:'unset', fontSize:'18px'}}

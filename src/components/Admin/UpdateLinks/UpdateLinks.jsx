@@ -7,7 +7,7 @@ import {
      CircularProgress,
      Box,
      Typography,
-    
+     Alert
     } from "@mui/material";
 import "./styles/UpdateLinks.css";
 import AddIcon from '@mui/icons-material/Add';
@@ -50,22 +50,28 @@ export default function UpdateLinks() {
 
     const [errorPage, setErrorPage] = useState(false);
 
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+
+    const [errorSnackbar, setErrorSnackbar] = useState(false);
+
     console.log('fetched links', fetchedLinks);
     useEffect(()=> {
         (async ()=>{
-            setLoadingLinks(true);
             try {
+                setLoadingLinks(true);
                 const linkResponse = await ifawfAdmin.get('/links');
                 const links = linkResponse.data.data;
                 setFetchedLinks(links);
                 setSearchedLinks(links);
                 setLoadingLinks(false);
+                setErrorSnackbar(false);
             } catch(error) {
+                console.log('some error happened');
                 setErrorPage(true);
+                setErrorSnackbar(true);
+            } finally {
                 setLoadingLinks(false);
             }
-
-            
         })()
     },[]);
 
@@ -112,10 +118,13 @@ export default function UpdateLinks() {
             } else {
                 setSearchedLinks(deleteResponse.data.data);
                 setFetchedLinks(deleteResponse.data.data);
+                setErrorSnackbar(false);
             }
         } catch(error) {
+            setErrorSnackbar(true);
             console.log('deleting');
         } finally {
+            setOpenSnackbar(true);
             setShowDeletePopup(false);
         }
     }
@@ -130,10 +139,12 @@ export default function UpdateLinks() {
         if(updatedLinks != null){
             // add updated links to state
             setFetchedLinks(updatedLinks);
-            setSearchedLinks(updatedLinks)
+            setSearchedLinks(updatedLinks);
+            setOpenSnackbar(true);
         }
         setShowLinkPopup(false);
         setShowEditLinkPopup(false);
+        setErrorSnackbar(false);
     }
 
 
@@ -160,6 +171,29 @@ export default function UpdateLinks() {
                 onDelete={onConfirmDeleteLink}
                 open={showDeletePopup}
             />
+            <Snackbar
+                open={openSnackbar}
+                onClose={()=> setOpenSnackbar(false)}
+                autoHideDuration={4000}
+                anchorOrigin={{horizontal:'center', vertical:'bottom'}}
+            >
+                {
+                    errorSnackbar === false ? (
+                        <Alert
+                            severity='success'
+                        >
+                            Links have been successfully updated
+                        </Alert>
+                    ):(
+                        <Alert
+                            severity='error'
+                        >
+                            Unable to update links. Please check internet connection or contact IT.
+                        </Alert>
+                    )
+                }
+
+            </Snackbar>
             <div className="u-links-main">
                 <div className="u-links-container">
                     <Stack

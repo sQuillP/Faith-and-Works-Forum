@@ -16,12 +16,14 @@ export default function UpdateAbout() {
     const [showNotification, setShowNotification] = useState(false);    
     const [showError, setShowError] = useState(false);
     const [updatingData, setUpdatingdata] = useState(false);
+    const [loadingAbout, setLoadingAbout] = useState(false);
 
 
     // Remember to use abortcontroller?
     useEffect(()=> {
         (async ()=> {
             try {
+                setLoadingAbout(true);
                 const aboutResponse = await ifawfAdmin.get('/about');
                 if(aboutResponse.data.status >= 400) {
                     throw new Error("Invalid api call");
@@ -31,6 +33,8 @@ export default function UpdateAbout() {
                 console.log(error.message);
                 setShowError(true);
                 setShowNotification(true);
+            } finally {
+                setLoadingAbout(false);
             }
         })();
     },[]);
@@ -101,6 +105,7 @@ export default function UpdateAbout() {
                     <TextField
                         multiline
                         label="Page Description"
+                        disabled={loadingAbout}
                         value={aboutDescription}
                         onChange={(e)=> setAboutDescription(e.target.value)}
                         fullWidth={true}
@@ -116,7 +121,7 @@ export default function UpdateAbout() {
                             variant='contained'
                             color="success"
                             sx={{textTransform:'none'}}
-                            disabled={updatingData}
+                            disabled={updatingData || loadingAbout}
                             endIcon={updatingData && <CircularProgress size={20} sx={{color:'white'}}/>}
                         >
                             Save Changes
