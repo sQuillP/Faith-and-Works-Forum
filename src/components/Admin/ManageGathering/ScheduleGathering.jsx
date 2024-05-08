@@ -68,7 +68,6 @@ export default function ScheduleGathering() {
                 setEventLoadError(true);
             } finally {
                 setLoadingCurrentEvent(false);
-                console.log('done loading');
             }
         })();
     },[]);

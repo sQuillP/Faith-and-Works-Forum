@@ -112,7 +112,6 @@ export default function ManageUserTable() {
                 const eventid = await populateEventId();
                 query['eventid'] = eventid;
             }
-            console.log('sent query', query);
             const subscribersResponse = await ifawfAdmin.get('/subscribers',{params:query});
             const body = subscribersResponse.data;
 
@@ -127,7 +126,6 @@ export default function ManageUserTable() {
             setTableRows(body.data);
             setRowCount(body.count);
 
-            console.log('subscribers response', subscribersResponse.data);
         } catch(error) {
             console.log(error);
         } finally {

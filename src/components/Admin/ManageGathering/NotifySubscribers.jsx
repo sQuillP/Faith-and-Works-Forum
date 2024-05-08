@@ -30,7 +30,6 @@ export default function EmailSubscribers() {
      * @description connect to the api to send email informatin.
      */
     async function handleSubmit() {
-        console.log('submitting email');
         try {
             setOpenProceedDialog(false);
             setSendingEmails(true);

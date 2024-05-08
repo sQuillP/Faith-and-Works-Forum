@@ -45,7 +45,6 @@ const DUMMY_CONTACTS = [
 export default function Resources() {
 
     const {contacts} = useClientData();
-    console.log('contacts', contacts)
 
     return (
         <>

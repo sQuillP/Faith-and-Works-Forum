@@ -14,7 +14,7 @@ export const AuthContext = createContext(null)
 
 export default function Admin() {
 
-    const [token, setToken] = useState("asdf ")
+    const [token, setToken] = useState('')
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -30,10 +30,11 @@ export default function Admin() {
         }
     },[location.pathname])
 
-    console.log(token);
 
     async function logout() {
+        setToken('');
         localStorage.removeItem("TOKEN");
+        navigate('/admin/login');
     }
 
     return (

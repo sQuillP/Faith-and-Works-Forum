@@ -74,15 +74,10 @@ export default function ManageContacts() {
     },[]);
 
 
-    async function onUpdateContact(newContactDetails) {
-        //Make async request to update the new contact details.
-        console.log('updating contact with new contact details', newContactDetails);
-    }
     
 
     // Use this function to show the popup window.
     function onRemoveContact(removeContactDetails) {
-        console.log('removing contact');
         setOpenDeleteDialog(true);
         setDeleteContact(removeContactDetails);
     }
@@ -111,7 +106,6 @@ export default function ManageContacts() {
 
     async function _createNewContact(newContact) {
         setCreatingContact(true);
-        console.log(newContact);
         setTimeout(()=> setCreatingContact(false), 2000);
         try {
             // code
@@ -134,7 +128,6 @@ export default function ManageContacts() {
     // Make API request for updating contact.
     async function _updateContact(contact) {
         try {
-            console.log('updating contact');
             setUpdatingContact(true);
             setUpdateContact(contact);
             const contactResponse = await ifawfAdmin.put('/contacts',contact);

@@ -42,16 +42,13 @@ export default function CreateAdminLink({open, loading, updateLinks, linkData, u
             } else {
                 linkResponse = await ifawfAdmin.post('/links', {title: linkTitle, link});
             }
-            console.log(linkResponse);
             if(linkResponse.data.status >= 400) {
                 setShowError(true);
             } else {
-                console.log(linkResponse.data.data);
                 updateLinks(linkResponse.data.data);
                 setShowError(false);
             }
         } catch(error) {
-            console.log('in error catch',error.message);
             setShowError(true);
             // 
         } finally {

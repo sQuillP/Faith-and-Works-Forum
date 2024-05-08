@@ -25,7 +25,6 @@ export default function AdminLogin() {
         setLoggingIn(true);
         try {
             const loginResponse = await axios.post('https://h5zwtcapne.execute-api.us-east-2.amazonaws.com/PROD/login',loginData)
-            console.log(loginResponse)
             setLoggingIn(false);
             if(loginResponse.data.status >=400) {
                 throw new Error("Invalid username or password");

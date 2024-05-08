@@ -21,11 +21,16 @@ import {
     DialogTitle,
     DialogContent,
     DialogActions,
+    Snackbar,
+    Alert,
+    CircularProgress,
 
 } from "@mui/material";
 import { ArrowBack, Check, Close, Badge, ExpandMore, Key, Lock, Logout, Save } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import { useContext, useState } from "react";
+import { ifawfAdmin } from "../../_global/ifawf-api";
+import { AuthContext } from "../Admin/Admin";
 
 
 const accordionSX = {fontSize:'20px', fontWeight:'500'};
@@ -35,30 +40,91 @@ export default function Settings() {
 
     const navigation = useNavigate();
 
+    const context = useOutletContext();
+
     const [updatedUsername, setUpdatedUsername] = useState('');
 
     const [currentPassword, setCurrentPassword] = useState('');
     const [updatedPassword, setUpdatedPassword] = useState('');
 
+    const [loadingPasswordUpdate, setLoadingPasswordUpdate] = useState(false);
+    const [loadingUsernameUpdate, setLoadingUsernameUpdate] = useState(false);
+
 
     const [logoutDialog, setLogoutDialog] = useState(false);
+    const [updateError, setUpdateError] = useState(false);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
 
 
     const smallScreen = useMediaQuery('(max-width: 800px)');
 
 
-
     function onLogout() {
         //sign out functionality
+        context.logout();
     }
 
     async function onSaveUsername() {
         //make async request to change the username.
+        try {
+            setLoadingUsernameUpdate(true);
+            const usernameResponse = await ifawfAdmin.put('/admin-account', {
+                username:updatedUsername
+            },{params:{event:'username'}});
+            setUpdateError(false);
+            setCurrentPassword('');
+            setUpdatedPassword('');
+        } catch(error) {
+            setUpdateError(true);
+        } finally {
+            setLoadingUsernameUpdate(false);
+            setOpenSnackbar(true);
+        }
+    }
+
+
+    async function onUpdatePassword() {
+        try {
+            setLoadingPasswordUpdate(true);
+            const updateResponse = await ifawfAdmin.put('/admin-account',{
+                newPassword:updatedPassword,
+                oldPassword:currentPassword
+            },{params:{event:'password'}});
+            setUpdateError(false);
+            setUpdatedUsername('');
+        } catch(error) {
+            setUpdateError(true);
+        } finally {
+            setLoadingPasswordUpdate(false);
+            setOpenSnackbar(true);
+        }
     }
 
     return (
         <>
             <div className="admin-settings-container">
+            <Snackbar
+                open={openSnackbar}
+                onClose={()=> setOpenSnackbar(false)}
+                autoHideDuration={4000}
+                anchorOrigin={{horizontal:'center', vertical:'bottom'}}
+            >
+                {
+                    updateError === true ? (
+                        <Alert
+                            severity="error"
+                        >
+                        Unable to perform action.
+                        </Alert>
+                    ):(
+                        <Alert
+                            severity="success"
+                        >
+                            Successfully updated Admin profile.
+                        </Alert>
+                    )
+                }
+            </Snackbar>
                 <Dialog
                     open={logoutDialog}
                     onClose={()=> setLogoutDialog(false)}
@@ -136,11 +202,11 @@ export default function Settings() {
                         </AccordionDetails>
                         <AccordionActions>
                             <Button
-                                endIcon={<Save/>}
-                                disabled={updatedUsername.trim() === ''}
+                                endIcon={ loadingUsernameUpdate === true ? <CircularProgress size={20} sx={{color:'var(--dark)'}}/> : <Save/>}
+                                disabled={loadingUsernameUpdate || updatedUsername.trim() === ''}
                                 onClick={onSaveUsername}
                             >
-                                Save Changes
+                                Change username
                             </Button>
                         </AccordionActions>
                     </Accordion>
@@ -176,7 +242,6 @@ export default function Settings() {
                                                     <Close fontSize="15px"/>
                                                 </IconButton>
                                             </InputAdornment>
-
                                         )
                                     }}
                                 />
@@ -206,8 +271,9 @@ export default function Settings() {
                         <AccordionActions>
                             <Button
                                 color="success"
-                                endIcon={<Check/>}
-                                disabled={updatedPassword.trim() === '' || currentPassword.trim() == ''}
+                                endIcon={loadingPasswordUpdate ? <CircularProgress sx={{color:'var(--dark)'}} size={20}/> :<Check/>}
+                                onClick={onUpdatePassword}
+                                disabled={loadingPasswordUpdate || updatedPassword.trim() === '' || currentPassword.trim() == ''}
                             >
                                 Change Password
                             </Button>

@@ -9,10 +9,9 @@ import { useOutletContext } from "react-router-dom";
  */
 export default function AuthGuard({children}) {
     const context = useOutletContext();
-    console.log('outlet context', context);
 
     useEffect(()=> {
-        console.log('context token is ', context.token);
+        // console.log('context token is ', context.token);
     },[context.token]);
 
     if(!context.token) {

@@ -32,6 +32,5 @@ ifawfAdmin.interceptors.request.use(function(request) {
 
 // Extract only the data from the request. Who cares about the rest.
 ifawfClient.interceptors.response.use(function(response) {
-    console.log(response);
     return response.data.data;
 })

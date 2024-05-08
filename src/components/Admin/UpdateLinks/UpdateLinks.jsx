@@ -54,7 +54,6 @@ export default function UpdateLinks() {
 
     const [errorSnackbar, setErrorSnackbar] = useState(false);
 
-    console.log('fetched links', fetchedLinks);
     useEffect(()=> {
         (async ()=>{
             try {
@@ -110,8 +109,6 @@ export default function UpdateLinks() {
             return;
         }
         try {
-            console.log('actual delete data', deleteData);
-            console.log({title:deleteData.title})
             const deleteResponse = await ifawfAdmin.delete('/links',{data:{title:deleteData.title}});
             if(deleteResponse.data.status >= 400) {
                 console.log('unable to delete link');
