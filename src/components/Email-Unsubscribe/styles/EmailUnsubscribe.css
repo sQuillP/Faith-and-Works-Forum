@@ -1,0 +1,7 @@
+.eu-main {
+    height: 90vh;
+    background: #eee;;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

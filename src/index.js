@@ -31,6 +31,7 @@ import ManageContacts from './components/Admin/ManageContacts/ManageContacts';
 import Settings from './components/Admin/Settings/Settings';
 import ClientRoot from './components/ClientRoot/ClientRoot';
 import rootLoader from './components/_global/loaders/rootLoader';
+import EmailUnsubscribe from './components/Email-Unsubscribe/EmailUnsubscribe';
 // import Instagram from './components/Instagram/Instagram';
 
 
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: '/resources',
         element: <Resources/>
+      },
+      {
+        path:'/emailunsubscribe/:subscriptionid',
+        element:<EmailUnsubscribe/>
       },
       {
         path:"*",

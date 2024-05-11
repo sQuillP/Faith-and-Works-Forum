@@ -103,7 +103,7 @@ export default function ScheduleGathering() {
             created:eventData.created.toString(),
             main:"main",
             date:startDate,
-            timeEnd: eventData.timeEnd.toDate(),
+            timeEnd: new Date(eventData.timeEnd.toDate().setHours(startDate.getHours())),
             location: eventData.location,
             extraRequests: eventData.extraRequests
         };
@@ -113,6 +113,8 @@ export default function ScheduleGathering() {
 
     function handleChange(value, name) {
         setEventData({...eventData, [name]:value});
+
+        console.log("mapformgatheringtorequest:::",mapFormGatheringToRequest());
     }
 
     /**

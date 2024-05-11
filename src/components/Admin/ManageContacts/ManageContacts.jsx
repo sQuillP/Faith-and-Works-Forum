@@ -25,7 +25,7 @@ import {
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { ifawfAdmin, ifawfClient } from "../../_global/ifawf-api";
+import { ifawfAdmin } from "../../_global/ifawf-api";
 
 
 export default function ManageContacts() {
