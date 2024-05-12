@@ -31,7 +31,6 @@ export default function AnnoyingPopup({
                 try {
                     event.preventDefault();
                     setSubscribing(true);
-                    console.log(event.currentTarget);
                     const formData = new FormData(event.currentTarget);
                     const formJson = Object.fromEntries(formData.entries());
                     const subscriptionResponse = await ifawfDefault.post('/subscribers',{
@@ -43,7 +42,6 @@ export default function AnnoyingPopup({
                         }
                     });
                     setSuccessfulSubscription(true);
-                    console.log('successfully subscribed!')
                     console.log(subscriptionResponse);
                 } catch(error) {
                     console.log('there was an error subscribing to the website.');

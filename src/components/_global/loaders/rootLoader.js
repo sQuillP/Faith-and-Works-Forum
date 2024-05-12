@@ -1,7 +1,7 @@
 import { ifawfClient } from "../ifawf-api";
 
 
-export const getDataBody = ()=>{ return {about:null, gathering:null, contacts:null, links:null, error: false}}
+export const getDataBody = ()=>{ return {about:null, gathering:null, contacts:null, links:null}}
 
 // Site data to provide to the client.
 export default async function rootLoader() {

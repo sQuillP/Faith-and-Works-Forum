@@ -41,7 +41,7 @@ export default function Gathering() {
         if(new Date(gathering[0].timeEnd).getHours() >= 12){
             timeEnd += ' pm';
         }
-        return `${month} ${year} on ${day} from ${timeStart} - ${timeEnd}`
+        return `${month} ${gatheringDate.getDate()}, ${year} on ${day} from ${timeStart} - ${timeEnd}`
     }
 
     //format the time hours am/pm

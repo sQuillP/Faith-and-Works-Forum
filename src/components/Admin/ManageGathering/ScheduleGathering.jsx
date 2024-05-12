@@ -99,11 +99,19 @@ export default function ScheduleGathering() {
         //add the time start to the start date.
         startDate.setHours(eventData.timeStart.hour());
         startDate.setMinutes(eventData.timeStart.minute());
+
+        //First grab the endHours for the endDate
+        const endObject = eventData.timeEnd.toDate();
+
+        //
+        const timeEnd = new Date(new Date(endObject)
+            .setHours(endObject.getHours(),endObject.getMinutes()));
+
         const requestPayload = {
             created:eventData.created.toString(),
             main:"main",
             date:startDate,
-            timeEnd: new Date(eventData.timeEnd.toDate().setHours(startDate.getHours())),
+            timeEnd: timeEnd,
             location: eventData.location,
             extraRequests: eventData.extraRequests
         };
@@ -112,9 +120,36 @@ export default function ScheduleGathering() {
    
 
     function handleChange(value, name) {
-        setEventData({...eventData, [name]:value});
+        if(name === 'date') {
+            const newBaseDate = new Date(value.toDate());
 
-        console.log("mapformgatheringtorequest:::",mapFormGatheringToRequest());
+            // Change the start time to the newly selected time of year
+            const startHour = eventData.timeStart.hour();
+            const startMinute = eventData.timeStart.minute();
+
+            // Chang ethe end time to the newly selected time of year.
+            const endHour = eventData.timeEnd.hour();
+            const endMinute = eventData.timeEnd.minute();
+
+            const newTimeEnd = dayjs(
+                new Date(newBaseDate).setHours(endHour, endMinute)
+            );
+
+            const newTimeStart = dayjs(
+                new Date(newBaseDate).setHours(startHour,startMinute)
+            );
+
+            setEventData({
+                ...eventData,
+                timeStart: newTimeStart,
+                timeEnd: newTimeEnd,
+                date:value
+            })
+
+        } else {
+            setEventData({...eventData, [name]:value});
+        }
+
     }
 
     /**

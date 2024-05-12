@@ -100,7 +100,7 @@ export default function ManageUserTable() {
     },[]);
 
 
-    const fetchSusbcribers = useCallback( async ()=> {
+    const fetchSusbcribers = useCallback( async (subscriptionFilter)=> {
         try {
             setLoadingRows(true);
             const query =  {
@@ -139,7 +139,7 @@ export default function ManageUserTable() {
      * @description handle any filter changes that occur
      */
     useEffect(()=> {
-        fetchSusbcribers();
+        fetchSusbcribers(subscriptionFilter);
     },[subscriptionFilter,fetchSusbcribers]);
 
 
@@ -173,7 +173,7 @@ export default function ManageUserTable() {
                     alignItems={'center'}
                     flexWrap={'wrap'}
                 >
-                    <Typography fontSize={'30px'}>Event Attendees</Typography>
+                    <Typography fontSize={'30px'}>{subscriptionFilter === 'all'?"Site Subscribers":"Event Subscribers"}</Typography>
                     <Stack
                         direction={'row'}
                         gap={2}

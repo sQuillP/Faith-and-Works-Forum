@@ -30,7 +30,6 @@ export default function EmailUnsubscribe() {
         ( async ()=> {
             try {
                 const deleteResponse = await ifawfDefault.delete('/subscribers',{data:{ dateJoined:subscriptionid}})
-                console.log(deleteResponse, deleteResponse?.data);
             } catch(error) {
                 console.log(error, 'unsubscribe error?');
                 setErrorUnsubscribe(true);

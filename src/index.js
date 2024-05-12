@@ -36,11 +36,17 @@ import Unsubscribe from './components/Unsubscribe/Unsubscribe';
 // import Instagram from './components/Instagram/Instagram';
 
 
+/**
+ * TODO: 
+ *  - Get verified email account
+ * - Get pagination for links?
+ * - Update backend to actually send mass emails when email gets verified.
+ */
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <ClientRoot/>,
-    loader: rootLoader,
     children: [
       {
         path: "/home",

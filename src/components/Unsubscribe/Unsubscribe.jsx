@@ -55,6 +55,7 @@ export default function Unsubscribe() {
                     component={Paper} 
                     elevation={4} 
                     minHeight={'200px'} 
+                    maxWidth={'600px'}
                     p={3} 
                     display={'flex'} 
                     justifyContent={sentEmail === true ? 'flex-start':'space-between'} 
@@ -92,12 +93,14 @@ export default function Unsubscribe() {
                     ):(
                     <>
                         <Typography textAlign={'center'} fontFamily={'inherit'} mb={3} p={0} variant="p" fontSize={smallscreen === true ? '25px':'30px'}>Unsubscribe From Email List</Typography>
+                        <Typography textAlign={'center'} fontFamily={'inherit'} mb={3} p={0} variant="p" fontSize={'18px'}>Upon submissions you will receive a confirmation email link to unsubscribe from all email notifications.</Typography>
                         {emailError && (<Typography color='crimson'>Unable to send email. Please check your network connection.</Typography>)}
                         <TextField
                             onChange={(e)=> setEmail(e.target.value)}
                             fullWidth
                             size={smallscreen === true ? 'small':'medium'}
                             type='email'
+                            autoComplete="off"
                             InputProps={{
                                 endAdornment:(
                                     <InputAdornment position="start">
@@ -114,7 +117,8 @@ export default function Unsubscribe() {
                                 background:'var(--dark)',
                                 ":hover":  {
                                     background:'var(--dark)'
-                                }
+                                },
+                                marginTop:'20px'
                             }}
                             endIcon={
                                 loadingEmail === true && <CircularProgress size={20} sx={{color:'var(--dark)'}}/>

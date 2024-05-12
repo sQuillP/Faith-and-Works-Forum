@@ -8,40 +8,6 @@ import { Stack } from "@mui/material";
 import { useClientData } from "../ClientRoot/ClientRoot";
 
 
-const DUMMY_CONTACTS = [
-    {
-        image:"/Michael_Froedge.jpg",
-        firstName:'Michael',
-        lastName:'Froedge',
-        contactDetails: [
-            {
-                type:"Phone",
-                value:'(765)-524-1482'
-            },
-            {
-                type:'Email',
-                value:'michaelfroedge1@gmail.com'
-            }
-        ]
-    },
-    {
-        image:"/Josh_Chudy.png",
-        firstName:'Josh',
-        lastName:'Chudy',
-        contactDetails: [
-            {
-                type:"Phone",
-                value:'(812)-340-9928'
-            },
-            {
-                type:'Email',
-                value:'jtchudy@gmail.com'
-            }
-        ],
-        
-    }
-]
-
 export default function Resources() {
 
     const {contacts} = useClientData();
@@ -84,9 +50,9 @@ export default function Resources() {
                             })
                         }
                     </Stack>
-                    <div className="rc-col">
+                    {/* <div className="rc-col">
                         <ResourceEmailForm/>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <Footer/>

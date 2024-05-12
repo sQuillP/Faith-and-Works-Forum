@@ -65,7 +65,6 @@ export default function UpdateLinks() {
                 setLoadingLinks(false);
                 setErrorSnackbar(false);
             } catch(error) {
-                console.log('some error happened');
                 setErrorPage(true);
                 setErrorSnackbar(true);
             } finally {
@@ -119,7 +118,6 @@ export default function UpdateLinks() {
             }
         } catch(error) {
             setErrorSnackbar(true);
-            console.log('deleting');
         } finally {
             setOpenSnackbar(true);
             setShowDeletePopup(false);

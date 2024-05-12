@@ -91,13 +91,13 @@ export default function ManageGathering() {
                         <Card sx={cardSX}>
                             <CardContent>
                                 <Typography textAlign={'center'} color={'text.secondary'}>Total Attendees (Current Event)</Typography>
-                                <Typography textAlign={'center'} fontSize="30px">{siteSubscriberCount}</Typography>
+                                <Typography textAlign={'center'} fontSize="30px">{eventSubscriberCount}</Typography>
                             </CardContent>
                         </Card>
                         <Card sx={cardSX}>
                             <CardContent>
                                 <Typography textAlign={'center'} color={'text.secondary'}>Total Subscribers</Typography>
-                                <Typography textAlign={'center'} fontSize="30px">{eventSubscriberCount}</Typography>
+                                <Typography textAlign={'center'} fontSize="30px">{siteSubscriberCount}</Typography>
                             </CardContent>
                         </Card>
                     </Stack>
