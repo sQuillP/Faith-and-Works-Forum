@@ -84,9 +84,9 @@ export default function Resources() {
                             })
                         }
                     </Stack>
-                    {/* <div className="rc-col">
+                    <div className="rc-col">
                         <ResourceEmailForm/>
-                    </div> */}
+                    </div>
                 </div>
             </div>
             <Footer/>

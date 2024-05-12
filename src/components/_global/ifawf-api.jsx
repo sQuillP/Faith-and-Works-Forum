@@ -20,6 +20,15 @@ export const ifawfAdmin = axios.create({
 });
 
 
+//Use this instance for doing anything else on the client like logging particular content.
+export const ifawfDefault = axios.create({
+    baseURL:'https://h5zwtcapne.execute-api.us-east-2.amazonaws.com/PROD',
+    headers: {
+        "Content-Type":"application/json",
+    }
+})
+
+
 //Ensure that token is attached to each request.
 ifawfAdmin.interceptors.request.use(function(request) {
     const token = localStorage.getItem("TOKEN");

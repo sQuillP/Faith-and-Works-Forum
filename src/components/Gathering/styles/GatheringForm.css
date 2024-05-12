@@ -6,6 +6,10 @@
 */
 
 
+.gathering-form {
+    margin-top: 40px;
+}
+
 .gathering-form-container {
     background: var(--dark);
     padding: 25px;
@@ -16,6 +20,7 @@
 
 .gt-title-wrapper {
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .gt-title {
@@ -33,6 +38,7 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    margin-top: 20px;
 }
 
 .submit-gtf {
@@ -64,12 +70,15 @@
     color: var(--dark);
 }
 
-@media screen and (max-width: 455px) {
-    .gt-title {
-        text-align: center;
+.gt-col {
+    width: 80%;
+}
 
-    }
+@media screen and (max-width: 455px) {
     .gt-submit-wrapper {
         margin-top: 20px;
+    }
+    .gt-col {
+        width: 100%
     }
 }

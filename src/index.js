@@ -32,6 +32,7 @@ import Settings from './components/Admin/Settings/Settings';
 import ClientRoot from './components/ClientRoot/ClientRoot';
 import rootLoader from './components/_global/loaders/rootLoader';
 import EmailUnsubscribe from './components/Email-Unsubscribe/EmailUnsubscribe';
+import Unsubscribe from './components/Unsubscribe/Unsubscribe';
 // import Instagram from './components/Instagram/Instagram';
 
 
@@ -62,7 +63,11 @@ const router = createBrowserRouter([
         element: <Resources/>
       },
       {
-        path:'/emailunsubscribe/:subscriptionid',
+        path:'/unsubscribe',
+        element: <Unsubscribe/>
+      },
+      {
+        path:'/unsubscribe/:subscriptionid',
         element:<EmailUnsubscribe/>
       },
       {

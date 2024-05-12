@@ -148,8 +148,8 @@ export default function Gathering() {
                                     />
                                 </Stack>
                                 {/* Gathering Form */}
-                                {/* <GatheringForm/> */}
-                                <Stack direction={'row'} marginTop={'50px'} justifyContent={'center'}>
+                                <GatheringForm/>
+                                {/* <Stack direction={'row'} marginTop={'50px'} justifyContent={'center'}>
                                     <button 
                                         className="gc-button" 
                                         onClick={()=> window.open('https://www.eventbrite.com/e/indianapolis-faith-work-forum-launch-party-tickets-883540873537?aff=oddtdtcreator')}
@@ -157,7 +157,7 @@ export default function Gathering() {
                                     >
                                         RSVP <CheckCircleOutlineIcon style={{marginLeft: '10px'}}/>
                                     </button>
-                                </Stack>
+                                </Stack> */}
                                 <div className="gathering-content-bottom">
                                     <div className="gathering-content-questions">
                                         <p className="text gcq-header">Got any Questions?</p>

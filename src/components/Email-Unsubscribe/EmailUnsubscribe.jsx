@@ -1,11 +1,11 @@
 import "./styles/EmailUnsubscribe.css";
 
 import { useEffect, useState} from 'react'
-import {ifawfClient} from '../_global/ifawf-api';
+import {ifawfDefault} from '../_global/ifawf-api';
 import Navbar from '../_global/Navbar';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Footer from '../_global/Footer';
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
 
 
 
@@ -18,27 +18,24 @@ import { Box, CircularProgress, Typography } from '@mui/material';
 export default function EmailUnsubscribe() {
 
     const { subscriptionid } = useParams();
-    const [queryParams] = useSearchParams();
-    console.log(queryParams.get('subtype'))
-
-
-    console.log(subscriptionid);
 
     const [loadingRequest, setLoadingRequest] = useState(true);
     const [errorUnsubscribe, setErrorUnsubscribe] = useState(false);
+
+    const navigate = useNavigate();
+
 
 
     useEffect(()=> {
         ( async ()=> {
             try {
-                // setLoadingRequest(true);
-                console.log("working")
+                const deleteResponse = await ifawfDefault.delete('/subscribers',{data:{ dateJoined:subscriptionid}})
+                console.log(deleteResponse, deleteResponse?.data);
             } catch(error) {
-                console.log(error);
-                console.log('not working');
+                console.log(error, 'unsubscribe error?');
                 setErrorUnsubscribe(true);
             } finally {
-                // setLoadingRequest(false);
+                setLoadingRequest(false);
             }
         })();
     },[]);
@@ -57,10 +54,18 @@ export default function EmailUnsubscribe() {
                                     <Typography variant="h4" m={2}>Unsubscribing...</Typography>
                                 </Box>
                             )
-                        } else if(errorUnsubscribe === true) {
+                        } else if(errorUnsubscribe === false) {
                             return (
-                                <Box>
-                                    <Typography variant="h5">You have successfully unsubscribed</Typography>
+                                <Box display={'flex'} justifyContent={'center'} flexDirection={'column'} alignItems={'center'}>
+                                    <Typography mb={3} variant="h5">You have successfully unsubscribed</Typography>
+                                    <Button 
+                                        variant="contained"
+                                        sx={{
+                                            ":hover":{ background:'var(--dark)'},
+                                            background:'var(--dark)',
+                                        }} 
+                                        onClick={()=> navigate('/home')}
+                                    >Back to Home</Button>
                                 </Box>
                             )
                         } else {
