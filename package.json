@@ -23,6 +23,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "sync":"aws s3 sync ./build s3://indyfaithandworkforum.org",
+    "invalidate":"aws cloudfront create-invalidation --distribution-id E8GFNL14B2R55 --paths \"/*\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

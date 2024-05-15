@@ -26,6 +26,10 @@ export default function Gathering() {
         if(gathering.length === 0) {
             return;
         }
+
+        if(new Date() > new Date(gathering[0])) {
+            
+        }
         const options = {
             weekday: 'long',
             year: 'numeric',
@@ -83,7 +87,7 @@ export default function Gathering() {
             <Navbar/>
                 <div className="gathering-main">
                 {
-                    gathering.length === 0 ? (
+                    gathering.length === 0 || new Date() > gatheringDate ? (
                         <Box m={14}>
                             <Typography variant="h3" fontFamily={'inherit'} textAlign={'center'}>Our next gathering date is to be determined.</Typography>
                             {/* <Typography variant="h5" m={3} fontFamily={'inherit'} textAlign={'center'}>Stay up to date with all we're doing by subscribing to our email list!</Typography> */}
