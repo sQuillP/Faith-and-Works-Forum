@@ -166,14 +166,25 @@ export default function ScheduleGathering() {
                 throw new Error("invalid request");
             }
             const event = createdEvent.data.data[0];
+
             setIsUpdateMode(true);
             populateFields(event);
             setEventError(false);
         } catch(error) {
+            console.log(error)
             setEventError(true);
         } finally {
             setOpenSnackbar(true);
             setCreatingEvent(false);
+        }
+
+        try {
+            //sendgrid email
+            if(notifySubscribers === true) {
+                const notifiedSubscribersResponse = await ifawfAdmin.post('/notify-subscribers',{},{params:{type:'event-notify'}});
+            }
+        } catch(error) {
+            console.log('unable to send emails at this time')
         }
     }
 
@@ -321,9 +332,8 @@ export default function ScheduleGathering() {
                             <FormControlLabel 
                                 control={
                                     <Checkbox 
-                                        defaultChecked
                                         onChange={(e)=> setNotifySubscribers(e.target.checked)} 
-                                        value={eventData.emailSubscribers}
+                                        value={notifySubscribers}
                                     />
                                 } 
                                 label="Notify Subscribers About this Event" 
